@@ -1,0 +1,245 @@
+/* 2026 High-Visibility Navbar */
+.navbar {
+    position: fixed !important;
+    top: 0;             /* Touch the top edge */
+    left: 0;            /* Touch the left edge */
+    right: 0;           /* Touch the right edge */
+    width: 100%;        /* Span the full width */
+    max-width: none;    /* Remove the constraint */
+    
+    /* Alignment */
+    display: flex;
+    align-items: center; 
+    justify-content:空间-between; /* Keeps brand left and links right */
+    
+    background: blue; 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Bottom border only */
+    border-radius: 0;   /* Square edges to touch the screen corners */
+    
+    padding: 10px 40px; /* Slim vertical, generous horizontal padding */
+    z-index: 9999 !important;
+    transition: all 0.4s ease;
+}
+
+/* Scrolled state stays consistent but can get darker */
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+    padding: 8px 40px; /* Slightly slimmer when scrolling */
+    border-bottom: 1px solid #d4af37;
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    margin: 0;         /* Remove default margins that might break alignment */
+    line-height: 1;    /* Ensures it sits perfectly centered vertically */
+}
+.navbar {
+    position: fixed !important;
+    top: 0;             /* Touch the top edge */
+    left: 0;            /* Touch the left edge */
+    right: 0;           /* Touch the right edge */
+    width: 100%;        /* Span the full width */
+    max-width: none;    /* Remove the constraint */
+    
+    /* Alignment */
+    display: flex;
+    align-items: center; 
+    justify-content:空间-between; /* Keeps brand left and links right */
+    
+    background: rgba(255, 255, 255, 0.08); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15); /* Bottom border only */
+    border-radius: 0;   /* Square edges to touch the screen corners */
+    
+    padding: 10px 40px; /* Slim vertical, generous horizontal padding */
+    z-index: 9999 !important;
+    transition: all 0.4s ease;
+}
+
+/* Scrolled state stays consistent but can get darker */
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+    padding: 8px 40px; /* Slightly slimmer when scrolling */
+    border-bottom: 1px solid #d4af37;
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    margin: 0;         /* Remove default margins that might break alignment */
+    line-height: 1;    /* Ensures it sits perfectly centered vertically */
+}
+
+/* The Cart Pill - made it stand out with a gold glow */
+.cart-pill {
+    background: #d4af37; /* Gold color */
+    color: #000;
+    border-radius: 50px;
+    padding: 8px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: ;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background:red; /* Add a background color so text is readable */
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+}
+/* 1. Prevent overlap with fixed navbar */
+.content-wrapper {
+  padding-top: 80px; /* Adjust this to match your navbar height */
+}
+
+/* 2. Promo Section Styling */
+.promo-title {
+  color: #00C2FF;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.shop-btn-blue {
+  background-color: #0d6efd;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* 3. About Us Grid Styling */
+.section-title {
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+
+.feature-box {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 20px 5px;
+  border-radius: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.active-blue {
+  background-color: #00C2FF !important;
+  border: none;
+}
+
+.icon-blue {
+  color: #00C2FF;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.icon-white {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.feature-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  color: #333;
+}
+/* 1. Prevent overlap with fixed navbar */
+.content-wrapper {
+  padding-top: 80px; /* Adjust this to match your navbar height */
+}
+
+/* 2. Promo Section Styling */
+.promo-title {
+  color: #00C2FF;
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.shop-btn-blue {
+  background-color: #0d6efd;
+  color: white;
+  padding: 6px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* 3. About Us Grid Styling */
+.section-title {
+  font-weight: 800;
+  font-size: 1.6rem;
+}
+
+.feature-box {
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 20px 5px;
+  border-radius: 4px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.active-blue {
+  background-color: #00C2FF !important;
+  border: none;
+}
+
+.icon-blue {
+  color: #00C2FF;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.icon-white {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+
+.feature-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  color: #333;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap; /* Allows cards to drop to the next line on mobile */
+  gap: 20px;       /* Adds even spacing between cards */
+  justify-content: center;
+}
+
+.card {
+  /* Set a fixed percentage for 2-column layout minus the gap */
+  width: calc(50% - 20px); 
+  /* Or use a fixed pixel width if you want them identical regardless of screen */
+  min-width: 160px; 
+  box-sizing: border-box; /* Ensures padding doesn't break the width */
+}
+.card img {
+  width: 100%;      /* Forces image to fill the card width */
+  height: 200px;    /* Set a fixed height */
+  object-fit: cover; /* Crops the image to fit the box without stretching */
+  border-radius: 15px 15px 0 0; /* Keeps the top corners rounded */
+}

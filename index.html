@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CYNDY Bakes N More </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  
+  <style>
+  #testimonial-carousel {
+    display: flex;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+}
+.testimonial-card {
+    flex: 0 0 100%;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Luxury Glass Badge for the Discount */
+.glass-badge {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px 15px;
+  border-radius: 12px;
+}
+
+/* The "Live" Pulse Animation */
+@keyframes luxury-pulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.animate-pulse-slow {
+  animation: luxury-pulse 3s infinite ease-in-out;
+}
+
+/* Custom Text Tracking for Luxury Feel */
+.tracking-luxury {
+  letter-spacing: 0.3em;
+}
+
+    html { scroll-behavior: smooth; }
+    body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; }
+    .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); }
+    .text-dim { color: #888888; }
+    .nav-link:hover { color: #fff; opacity: 0.7; }
+    .hero-title { background: linear-gradient(to right, #ffffff, #888888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .catalog-card { 
+      background: #0A0A0A; 
+      border: 1px solid rgba(255, 255, 255, 0.05); 
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 2.5rem; 
+    }
+    .catalog-card:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-5px); }
+    .img-container { aspect-ratio: 4/5; overflow: hidden; border-radius: 2rem; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    
+    @keyframes slideUp { from { transform: translate(-50%, 100%); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+    .toast-anim { animation: slideUp 0.4s ease-out; }
+  </style>
+</head>
+<body class="antialiased pb-20">
+
+  <nav class="flex items-center justify-between px-6 py-6 sticky top-0 bg-black/80 backdrop-blur-lg z-50 border-b border-white/5">
+    <div class="text-xl font-bold tracking-tighter"><!-- Your main website navigation bar -->
+<nav class="navbar">
+    <!-- Add id="admin-secret-trigger" to your brand name -->
+    <span id="admin-secret-trigger" class="brand-logo" style="user-select: none; cursor: default;">
+        Cyndy Bakes <br>N more
+    </span>
+    
+    
+</nav>
+</div>
+    <div class="hidden md:flex space-x-8 text-[11px] uppercase tracking-widest font-semibold text-dim">
+      <a href="#new-collections" class="nav-link">Cakes</a>
+      <a href="#Meal-Time" class="nav-link">Meal Time</a>
+      <a href="#daily-deli" class="nav-link">Deli</a>
+    </div>
+    <div class="flex items-center gap-6">
+      <button onclick="toggleCart()" class="relative p-2 hover:bg-white/5 rounded-full transition">
+       <div class="cart-wrapper d-flex align-items-center justify-content-center">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" 
+         viewBox="0 0 24 24" fill="none" 
+         stroke="#f48c2e" stroke-width="1.5" 
+         stroke-linecap="round" stroke-linejoin="round" 
+         class="luxury-bag">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+        <path d="M3 6h18"></path>
+        <path d="M16 10a4 4 0 0 1-8 0"></path>
+    </svg>
+</div>
+
+<style>
+    /* Styling to make it look premium and interactive */
+    .luxury-bag {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        /* Adds a subtle glow effect seen in luxury dark themes */
+        filter: drop-shadow(0 0 4px rgba(244, 140, 46, 0.2));
+    }
+
+    .luxury-bag:hover {
+        stroke: #ffae63; /* Lighter orange on hover */
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 8px rgba(244, 140, 46, 0.5));
+    }
+</style>
+
+        <span id="cart-count" class="absolute top-0 right-0 bg-white text-black text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center hidden">0</span>
+      </button>
+      <button onclick="openStrategyModal()" 
+        class="border border-white/20 px-5 py-2 rounded-full text-[10px] uppercase tracking-widest hover:bg-white hover:text-black transition group">
+  Book a Strategy Call <span class="inline-block group-hover:rotate-45 transition-transform">↗</span>
+</button>
+
+    </div>
+  </nav>
+
+<section class="max-w-7xl mx-auto px-6 pt-16 pb-24 grid lg:grid-cols-2 gap-12 items-center">
+  <div>
+    <div class="flex gap-8 mb-8">
+      <div class="flex items-center gap-2">
+        <i class="bi bi-patch-check text-dim text-xl mb-2 text-primary"></i>
+        <div class="leading-none">
+          <p class="text-[9px] font-bold uppercase tracking-wider">Artisan</p>
+          <p class="text-[9px] text-dim uppercase tracking-wider">Craftsmanship</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <i class="bi bi-lightning-charge text-dim text-xl mb-2 text-success"></i>
+        <div class="leading-none">
+          <p class="text-[9px] font-bold uppercase tracking-wider">Punctual Concierge</p>
+          <p class="text-[9px] text-dim uppercase tracking-wider">Delivery</p>
+        </div>
+      </div>
+    </div>
+
+    <span class="text-[10px] uppercase tracking-[0.3em] text-accent mb-4 block">Premium Culinary Solutions</span>
+<h1 class="text-5xl md:text-7xl font-bold leading-[1.1] mb-6">
+  Built For <br> 
+  <span class="hero-gradient">Luxury Impact.</span>
+</h1>
+<p class="text-dim max-w-md mb-8 leading-relaxed text-sm">
+  Experience high-performance flavors, luxury cakes, and culinary solutions that help your celebrations stand out.
+</p>
+
+<div class="flex space-x-6 items-center mb-16">
+  <a href="#new-collections" class="btn-luxury-orange px-8 py-4 rounded-full font-bold text-sm transition">
+    Order Now
+  </a>
+  
+  <a href="#new-collections" class="text-xs font-bold uppercase tracking-widest text-accent hover:text-white transition">
+    View Catalog →
+  </a>
+</div>
+
+<style>
+  /* 1. The Accent Orange (from your screenshot) */
+  .text-accent {
+    color: #f48c2e;
+  }
+
+  /* 2. The Multi-color Gradient for "Luxury Impact" */
+  .hero-gradient {
+    background: linear-gradient(to right, #e5d5c0 0%, #f08a5d 50%, #78e4e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* 3. The Solid Orange Button with Hover State */
+  .btn-luxury-orange {
+    background-color: #f48c2e;
+    color: #000;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px 15px rgba(244, 140, 46, 0.2);
+  }
+
+  .btn-luxury-orange:hover {
+    background-color: #ffae63;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(244, 140, 46, 0.4);
+  }
+
+  /* Muted Text Color */
+  .text-dim {
+    color: #9ca3af;
+  }
+</style>
+
+<div class="grid grid-cols-2 gap-y-10 gap-x-4 border-t border-white/10 pt-10">
+  
+  <!-- 1. Custom Creations Delivered -->
+  <div class="flex flex-col items-center text-center">
+   <i class="bi bi-gem text-xl mb-2" 
+   style="background: linear-gradient(135deg, #0d6efd 0%, #dc3545 35%, #ffc107 70%, #198754 100%); 
+          -webkit-background-clip: text; 
+          background-clip: text; 
+          color: transparent; 
+          display: inline-block;">
+</i>
+
+    <h4 class="text-3xl font-bold">1,200+</h4>
+    <p class="text-[9px] text-dim uppercase tracking-[0.2em] mt-1">Custom Creations Delivered</p>
+  </div>
+
+  <!-- 2. Elite Celebrations Hosted -->
+ <div class="flex flex-col items-center text-center">
+  <!-- Elite / Premium Crown Icon -->
+<i class="bi bi-star-fill mb-2 text-xl" style="color: #d4af37;"></i>
+
+
+  <h4 class="text-3xl font-bold">150+</h4>
+  <p class="text-[9px] text-dim uppercase tracking-[0.2em] mt-1">Elite Celebrations Hosted</p>
+</div>
+
+
+  
+  <div class="flex flex-col items-center text-center">
+
+<i class="bi bi-fire text-warning" style="font-size: 2rem;"></i>
+
+
+
+
+  <h4 class="text-3xl font-bold">10+</h4>
+  <p class="text-[9px] text-dim uppercase tracking-[0.2em] mt-1">Years of Culinary Mastery</p>
+</div>
+
+
+  
+  <div class="flex flex-col items-center text-center">
+<!-- Strawberry Icing Vibe -->
+<i class="bi bi-cake2 text-xl mb-2" style="color: #ff85a2;"></i>
+
+
+
+
+    <h4 class="text-3xl font-bold">100%</h4>
+    <p class="text-[9px] text-dim uppercase tracking-[0.2em] mt-1">Bespoke Ingredients Sourced</p>
+  </div>
+
+</div>
+
+
+  <div class="glass-card p-6 rounded-3xl relative overflow-hidden group min-h-[220px] flex items-end mt-3">
+    
+    
+    <video 
+      autoplay 
+      loop 
+      muted 
+      playsinline 
+      preload="auto"
+      class="absolute inset-0 w-full h-full object-cover z-0 opacity-40 mix-blend-lighten filter brightness-75 contrast-125 transition-transform duration-700 group-hover:scale-105">
+      <source src="20260518233151~2.mp4" type="video/mp4">
+      
+      <img src="coco.jpg" class="absolute inset-0 w-full h-full object-cover opacity-40 z-0">
+    </video>
+
+    
+    <div class="absolute inset-0 z-10 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+
+    
+    <div class="absolute top-6 right-6 z-20 text-right">
+       <span class="text-3xl font-black text-green-400 block tracking-tight shadow-sm drop-shadow-[0_2px_8px_rgba(74,222,128,0.2)]">-70%</span>
+       <span class="text-[8px] font-bold uppercase tracking-widest block text-yellow-400 mt-0.5">Sales-discount</span>
+    </div>
+
+    
+    <div class="relative z-20 w-full mt-auto pt-12">
+       <span class="text-[8px] font-bold uppercase tracking-widest text-slate-400 block">Limited Curation</span>
+       <h4 class="text-sm font-black uppercase tracking-wider text-white mt-1">Exclusive Vault Offer</h4>
+    </div>
+
+</div>
+</section>
+<section id="new-collections" class="py-16 px-6 max-w-7xl mx-auto">
+  <div class="mb-10 text-center">
+    <h2 class="text-2xl font-black uppercase tracking-widest text-white">New Collections</h2>
+    <p class="text-xs text-[#f48c2e] mt-2 uppercase tracking-wider font-semibold">Handcrafted Premium Confections</p>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    
+    <div class="catalog-card p-4 border border-dashed border-[#f48c2e]/30 bg-[#f48c2e]/[0.03] cursor-pointer group rounded-2xl transition-all duration-500 hover:bg-[#f48c2e]/[0.08]" onclick="openDrawer('Bespoke Request', 'Custom', 0, '', true)">
+      <div class="img-container mb-4 flex items-center justify-center bg-white/5 border border-white/5 rounded-xl aspect-square overflow-hidden">
+        <i class="bi bi-pencil-square text-4xl text-[#f48c2e] group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_8px_rgba(244,140,46,0.4)]"></i>
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white">Custom Design</h3>
+        <p class="text-[10px] hero-gradient tracking-widest font-black mt-1 uppercase">Start Vision ↗</p>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Double Chocolate', 'Luxury', 24000, 'choc3.jpg')">
+        <img src="coconut cream.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Double+Chocolate'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Double Chocolate</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦24,000</p>
+        <button onclick="addToCart('Double Chocolate', 24000, 'choc3.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Classic Vanilla', 'Seasonal', 21000, 'val.jpg')">
+        <img src="val.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Classic+Vanilla'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Classic Vanilla</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦21,000</p>
+        <button onclick="addToCart('Classic Vanilla', 21000, 'val.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Strawberry Red', 'Popular', 12000, 'straw.jpg')">
+        <img src="straw.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Strawberry+Red'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Strawberry Red</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦12,000</p>
+        <button onclick="addToCart('Strawberry Red', 12000, 'straw.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Royal Fruit', 'Luxury', 15000, 'fruit.jpg')">
+        <img src="fruit.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Royal+Fruit'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Royal Fruit</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦15,000</p>
+        <button onclick="addToCart('Royal Fruit', 15000, 'fruit.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Red Velvet', 'Premium', 18000, 'red.jpg')">
+        <img src="red.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Red+Velvet'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Red Velvet</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦18,000</p>
+        <button onclick="addToCart('Red Velvet', 18000, 'red.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Oreo Crunch', 'Modern', 22000, 'oreo.jpg')">
+        <img src="oreo.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Oreo+Crunch'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Oreo Crunch</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦22,000</p>
+        <button onclick="addToCart('Oreo Crunch', 22000, 'oreo.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Caramel Drip', 'Luxury', 26000, 'caramel.jpg')">
+        <img src="caramel.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Caramel+Drip'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Caramel Drip</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦26,000</p>
+        <button onclick="addToCart('Caramel Drip', 26000, 'caramel.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Cheese cake', 'Classic', 19000, 'white.jpg')">
+        <img src="chees.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=White+Forest'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Cheese cake</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦19,000</p>
+        <button onclick="addToCart('Cheese cake', 19000, 'white.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Lemon Zest', 'Fresh', 16000, 'lemon.jpg')">
+        <img src="lemon.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Lemon+Zest'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Lemon Zest</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦16,000</p>
+        <button onclick="addToCart('Lemon Zest', 16000, 'lemon.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Coconut Cream', 'Tropical', 17500, 'coco.jpg')">
+        <img src="coco.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Coconut+Cream'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Coconut Cream</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦17,500</p>
+        <button onclick="addToCart('Coconut Cream', 17500, 'coco.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f48c2e]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Pink Marble', 'Artisan', 23000, 'marble.jpg')">
+        <img src="marble.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Pink+Marble'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f48c2e] transition-colors">Pink Marble</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦23,000</p>
+        <button onclick="addToCart('Pink Marble', 23000, 'marble.jpg'); event.stopPropagation();" class="mt-3 w-full btn-luxury-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Multi-color Headline Gradient */
+  .hero-gradient {
+    background: linear-gradient(to right, #e5d5c0 0%, #f08a5d 50%, #78e4e0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Luxury Ghost-to-Solid Orange Button */
+  .btn-luxury-action {
+    background: rgba(244, 140, 46, 0.08);
+    color: #f48c2e;
+    border: 1px solid rgba(244, 140, 46, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-luxury-action:hover {
+    background: #f48c2e;
+    color: #000;
+    box-shadow: 0 0 15px rgba(244, 140, 46, 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* Luxury Smooth Transitions */
+  .catalog-card img {
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+</style>
+
+
+<section id="Meal-Time" class="py-16 px-6 max-w-7xl mx-auto border-t border-white/5">
+  <div class="mb-10 text-center">
+    <h2 class="text-2xl font-black uppercase tracking-widest text-white">Meal-Time Selection</h2>
+    <p class="text-xs text-[#f59e0b] mt-2 uppercase tracking-wider font-semibold">Gourmet Savory Entrées & Traditional Platters</p>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Card 12 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Amala & Ewedu', 'Traditional', 5000, 'meal1.jpg')">
+        <img src="meal1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Amala+%26+Ewedu'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Amala & Ewedu</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦5,000</p>
+        <button onclick="addToCart('Amala & Ewedu', 5000, 'meal1.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 13 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Party Jollof', 'Classic', 4500, 'meal2.jpg')">
+        <img src="meal2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Party+Jollof'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Party Jollof</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦4,500</p>
+        <button onclick="addToCart('Party Jollof', 4500, 'meal2.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 14 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Fried Rice Combo', 'Premium', 5500, 'meal3.jpg')">
+        <img src="meal3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Fried+Rice+Combo'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Fried Rice Combo</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦5,500</p>
+        <button onclick="addToCart('Fried Rice Combo', 5500, 'meal3.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 15 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Pounded Yam', 'Traditional', 6000, 'meal4.jpg')">
+        <img src="meal4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Pounded+Yam'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Pounded Yam</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦6,000</p>
+        <button onclick="addToCart('Pounded Yam', 6000, 'meal4.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 16 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Creamy Pasta', 'Italian', 7000, 'meal5.jpg')">
+        <img src="meal5.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Creamy+Pasta'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Creamy Pasta</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦7,000</p>
+        <button onclick="addToCart('Creamy Pasta', 7000, 'meal5.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 17 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Grilled Fish', 'Protein', 8500, 'meal6.jpg')">
+        <img src="meal6.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Grilled+Fish'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Grilled Fish</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦8,500</p>
+        <button onclick="addToCart('Grilled Fish', 8500, 'meal6.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 18 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Spicy Wings', 'Sides', 4000, 'meal7.jpg')">
+        <img src="meal7.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Spicy+Wings'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Spicy Wings</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦4,000</p>
+        <button onclick="addToCart('Spicy Wings', 4000, 'meal7.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 19 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Fruit Bowl', 'Healthy', 3500, 'meal8.jpg')">
+        <img src="meal8.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Fruit+Bowl'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Fruit Bowl</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦3,500</p>
+        <button onclick="addToCart('Fruit Bowl', 3500, 'meal8.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 20 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Catfish Soup', 'Traditional', 5500, 'meal9.jpg')">
+        <img src="meal9.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Catfish+Soup'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Catfish Soup</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦5,500</p>
+        <button onclick="addToCart('Catfish Soup', 5500, 'meal9.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 21 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Rice & Beans', 'Classic', 4000, 'meal10.jpg')">
+        <img src="meal10.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Rice+%26+Beans'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Rice & Beans</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦4,000</p>
+        <button onclick="addToCart('Rice & Beans', 4000, 'meal10.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 22 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Yam Porridge', 'Traditional', 4500, 'meal11.jpg')">
+        <img src="meal11.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Yam+Porridge'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Yam Porridge</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦4,500</p>
+        <button onclick="addToCart('Yam Porridge', 4500, 'meal11.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 23 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#f59e0b]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Gizz-Dodo', 'Signature', 5000, 'meal12.jpg')">
+        <img src="meal12.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Gizz-Dodo'">
+      </div>
+      <div class="px-2">
+        <h3 class="text-sm font-bold truncate text-white group-hover:text-[#f59e0b] transition-colors">Gizz-Dodo</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦5,000</p>
+        <button onclick="addToCart('Gizz-Dodo', 5000, 'meal12.jpg'); event.stopPropagation();" class="mt-3 w-full btn-savory-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Luxury Ghost-to-Solid Gold Savory Button */
+  .btn-savory-action {
+    background: rgba(245, 158, 11, 0.08);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-savory-action:hover {
+    background: #f59e0b;
+    color: #000;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* Luxury Smooth Transitions */
+  .catalog-card img {
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+</style>
+
+<section id="Packages" class="py-20 px-6 max-w-7xl mx-auto text-white">
+  <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+    <div>
+      <span class="text-[10px] uppercase tracking-[0.3em] text-[#e0a96d] mb-4 block font-semibold">Floral & Gift Concierge</span>
+      <h2 class="text-4xl font-bold">Gifting <span class="hero-gradient">Packages.</span></h2>
+    </div>
+    <p class="text-gray-400 text-sm max-w-xs leading-relaxed">Thoughtfully curated bouquets and luxury gift pairings for every milestone.</p>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+    
+    <!-- Card 1 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]"> 
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Classic Red Roses', 'Romantic', 15000, 'roses.jpg')">
+        <img src="roses.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Red+Roses'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Classic Red Roses</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦15,000</p>
+        <button onclick="addToCart('Classic Red Roses', 15000, 'rose1.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Money Bouquet', 'Elegant', 18500, 'money.jpg')">
+        <img src="money.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=money+bouquets'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Money bouquets</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦18,500</p>
+        <button onclick="addToCart('Money Bouquets', 18500, 'money.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('The Birthday Bundle', 'Bundle', 45000, 'gift1.jpg')">
+        <img src="gift1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Birthday+Bundle'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">The Birthday Bundle</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦45,000</p>
+        <button onclick="addToCart('The Birthday Bundle', 45000, 'gift1.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('flower Bouquet', 'Seasonal', 12000, 'fbouquet.jpg')">
+        <img src="fbouquet.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=flower+Bouquet'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Flowers Bouquet</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦12,000</p>
+        <button onclick="addToCart('flower Bouquet', 12000, 'sun.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Luxury Gift Basket', 'Fresh', 25000, 'basket.jpg')">
+        <img src="basket.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Fruit+Basket'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Luxury Gift Basket</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦25,000</p>
+        <button onclick="addToCart('Luxury Gift Basket', 25000, 'basket.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Wine & Chocolate Box', 'Luxury', 35000, 'wine-choc.jpg')">
+        <img src="wine-choc.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Wine+&+Chocolate'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Wine & Chocolate Box</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦35,000</p>
+        <button onclick="addToCart('Wine & Chocolate Box', 35000, 'wine-choc.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Mixed Gerberas', 'Vibrant', 14000, 'gerb.jpg')">
+        <img src="gerb.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Gerberas'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Mixed Gerberas</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦14,000</p>
+        <button onclick="addToCart('Mixed Gerberas', 14000, 'gerb.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Orchid Elegance', 'Premium', 22000, 'orchid.jpg')">
+        <img src="orchid.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Orchid'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Orchid Elegance</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦22,000</p>
+        <button onclick="addToCart('Orchid Elegance', 22000, 'orchid.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Pamper Hamper', 'Self-Care', 40000, 'pamper.jpg')">
+        <img src="pamper.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Hamper'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Pamper Hamper</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦40,000</p>
+        <button onclick="addToCart('Pamper Hamper', 40000, 'pamper.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 10 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Eternal Bloom', 'Dried', 28000, 'dried.jpg')">
+        <img src="dried.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Dried+Flowers'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Eternal Bloom</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦28,000</p>
+        <button onclick="addToCart('Eternal Bloom', 28000, 'dried.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 11 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Baby Welcome Kit', 'Newborn', 32000, 'baby.jpg')">
+        <img src="baby.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Baby+Gift'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Baby Welcome Kit</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦32,000</p>
+        <button onclick="addToCart('Baby Welcome Kit', 32000, 'baby.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 12 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Tulip Fantasy', 'Imported', 30000, 'tulip.jpg')">
+        <img src="tulip.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Tulips'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Tulip Fantasy</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦30,000</p>
+        <button onclick="addToCart('Tulip Fantasy', 30000, 'tulip.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Luxury Ghost-to-Solid Soft Floral Gold Button */
+  .btn-floral-action {
+    background: rgba(224, 169, 109, 0.08);
+    color: #e0a96d;
+    border: 1px solid rgba(224, 169, 109, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-floral-action:hover {
+    background: #e0a96d;
+    color: #000;
+    box-shadow: 0 0 15px rgba(224, 169, 109, 0.4);
+    transform: translateY(-2px);
+  }
+
+  /* Luxury Smooth Transitions */
+  .catalog-card img {
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+</style>
+
+<section id="Celebrations" class="py-20 px-6 max-w-7xl mx-auto border-t border-white/5 text-white">
+  <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+    <div>
+      <span class="text-[10px] uppercase tracking-[0.3em] text-[#e0a96d] mb-4 block font-semibold">Bespoke Confectionery</span>
+      <h2 class="text-4xl font-bold">Celebration <span class="hero-gradient">Tiers.</span></h2>
+    </div>
+    <p class="text-gray-400 text-sm max-w-xs leading-relaxed">Architectural designs and avant-garde flavor profiles for your most significant milestones.</p>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+    
+    <!-- Card 1 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Birthday', 'Luxury', 145000, 'birthday.jpg')">
+        <img src="birthday.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=birthday'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Birthday</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦145,000</p>
+        <button onclick="addToCart('Birthday', 145000, 'birthday.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Annivesary', 'Elegant', 180000, 'anniversary.jpg')">
+        <img src="anniversary.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=anniversary'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Annivesary</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦180,000</p>
+        <button onclick="addToCart('Annivesary', 180000, 'anniversary.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Emerald Cube', 'Modern', 160000, 'emerald.jpg')">
+        <img src="emerald.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Emerald+Cube'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Emerald Cube</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦160,000</p>
+        <button onclick="addToCart('Emerald Cube', 160000, 'emerald.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Graduation', 'Couture', 155000, 'graduation.jpg')">
+        <img src="graduation.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Graduation'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Graduation</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦155,000</p>
+        <button onclick="addToCart('Graduation', 155000, 'graduation.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Wedding', 'Classic', 195000, 'wedding.jpg')">
+        <img src="wedding.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Wedding'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Wedding</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦195,000</p>
+        <button onclick="addToCart('Wedding', 195000, 'wedding.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Obsidian Glass', 'Artistic', 210000, 'obsidian.jpg')">
+        <img src="obsidian.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Obsidian+Glass'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Obsidian Glass</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦210,000</p>
+        <button onclick="addToCart('Obsidian Glass', 210000, 'obsidian.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Botanical Gilt', 'Floral', 150000, 'botanical.jpg')">
+        <img src="botanical.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Botanical+Gilt'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Botanical Gilt</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦150,000</p>
+        <button onclick="addToCart('Botanical Gilt', 150000, 'botanical.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Brutalist Stone', 'Minimal', 140000, 'concrete.jpg')">
+        <img src="concrete.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Brutalist+Stone'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Brutalist Stone</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦140,000</p>
+        <button onclick="addToCart('Brutalist Stone', 140000, 'concrete.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Opal Shimmer', 'Lustre', 175000, 'opal.jpg')">
+        <img src="opal.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Opal+Shimmer'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Opal Shimmer</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦175,000</p>
+        <button onclick="addToCart('Opal Shimmer', 175000, 'opal.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 10 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Mosaic Tile', 'Bespoke', 165000, 'mosaic.jpg')">
+        <img src="mosaic.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Mosaic+Tile'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Mosaic Tile</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦165,000</p>
+        <button onclick="addToCart('Mosaic Tile', 165000, 'mosaic.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 11 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Sapphire Fissure', 'Masterpiece', 225000, 'sapphire.jpg')">
+        <img src="sapphire.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Sapphire+Fissure'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Sapphire Fissure</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦225,000</p>
+        <button onclick="addToCart('Sapphire Fissure', 225000, 'sapphire.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 12 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Venetian Velvet', 'Vintage', 185000, 'venetian.jpg')">
+        <img src="venetian.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Venetian+Velvet'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Venetian Velvet</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦185,000</p>
+        <button onclick="addToCart('Venetian Velvet', 185000, 'venetian.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="Daily-Deli" class="py-20 px-6 max-w-7xl mx-auto border-t border-white/5 text-white">
+  <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+    <div>
+      <span class="text-[10px] uppercase tracking-[0.3em] text-[#e0a96d] mb-4 block font-semibold">Gourmet Selection</span>
+      <h2 class="text-4xl font-bold">Daily <span class="hero-gradient">Deli.</span></h2>
+    </div>
+    <p class="text-gray-400 text-sm max-w-xs leading-relaxed">Freshly prepared sandwiches, salads, and artisan provisions for the sophisticated palate.</p>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8">
+    
+    <!-- Card 1 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500 hover:shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Artisan Baguette', 'Fresh', 3500, 'deli1.jpg')">
+        <img src="deli1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Baguette'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Artisan Baguette</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦3,500</p>
+        <button onclick="addToCart('Artisan Baguette', 3500, 'deli1.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Smoked Turkey Sub', 'Classic', 8500, 'deli2.Sub')">
+        <img src="deli2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Turkey+Sub'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Smoked Turkey Sub</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦8,500</p>
+        <button onclick="addToCart('Smoked Turkey Sub', 8500, 'deli2.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Greek Salad Bowl', 'Healthy', 6000, 'deli3.jpg')">
+        <img src="deli3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Salad'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Greek Salad Bowl</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦6,000</p>
+        <button onclick="addToCart('Greek Salad Bowl', 6000, 'deli3.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Pastrami Melt', 'Signature', 9500, 'deli4.jpg')">
+        <img src="deli4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Pastrami'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Pastrami Melt</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦9,500</p>
+        <button onclick="addToCart('Pastrami Melt', 9500, 'deli4.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Egg Salad Pot', 'Protein', 4500, 'deli5.jpg')">
+        <img src="deli5.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Egg+Salad'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Egg Salad Pot</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦4,500</p>
+        <button onclick="addToCart('Egg Salad Pot', 4500, 'deli5.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Cold Brew Coffee', 'Chilled', 3000, 'deli6.jpg')">
+        <img src="deli6.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Cold+Brew'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Cold Brew Coffee</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦3,000</p>
+        <button onclick="addToCart('Cold Brew Coffee', 3000, 'deli6.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 7 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Club Sandwich', 'Popular', 7500, 'deli7.jpg')">
+        <img src="deli7.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Club+Sandwich'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Club Sandwich</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦7,500</p>
+        <button onclick="addToCart('Club Sandwich', 7500, 'deli7.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 8 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Hummus & Pita', 'Vegan', 5000, 'deli8.jpg')">
+        <img src="deli8.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Hummus'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Hummus & Pita</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦5,000</p>
+        <button onclick="addToCart('Hummus & Pita', 5000, 'deli8.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Fruit Parfait', 'Fresh', 4000, 'deli9.jpg')">
+        <img src="deli9.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Parfait'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Fruit Parfait</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦4,000</p>
+        <button onclick="addToCart('Fruit Parfait', 4000, 'deli9.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 10 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Beef Bresaola', 'Luxury', 12000, 'deli10.jpg')">
+        <img src="deli10.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Bresaola'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Beef Bresaola</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦12,000</p>
+        <button onclick="addToCart('Beef Bresaola', 12000, 'deli10.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 11 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Assorted Olives', 'Artisan', 3500, 'deli11.jpg')">
+        <img src="deli11.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Olives'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Assorted Olives</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦3,500</p>
+        <button onclick="addToCart('Assorted Olives', 3500, 'deli11.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+    <!-- Card 12 -->
+    <div class="catalog-card p-4 group bg-white/[0.02] border border-white/10 rounded-2xl hover:border-[#e0a96d]/40 transition-all duration-500">
+      <div class="img-container mb-4 cursor-pointer aspect-square overflow-hidden rounded-xl bg-neutral-900 border border-white/5" onclick="openDrawer('Cheese Selection', 'Premium', 15000, 'deli12.jpg')">
+        <img src="deli12.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" onerror="this.src='https://placehold.co/400x400?text=Cheese'">
+      </div>
+      <div class="w-full px-2">
+        <h3 class="text-sm font-bold truncate group-hover:text-[#e0a96d] transition-colors">Cheese Selection</h3>
+        <p class="text-[10px] text-gray-400 uppercase mt-1">₦15,000</p>
+        <button onclick="addToCart('Cheese Selection', 15000, 'deli12.jpg'); event.stopPropagation();" class="mt-3 w-full btn-floral-action py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Latest Public Articles (Aligned to Premium Theme) -->
+
+<!-- Detail Drawer -->
+<div id="detail-drawer" class="fixed inset-y-0 right-0 w-full sm:w-[500px] bg-black/80 border-l border-white/10 backdrop-blur-2xl z-[100] translate-x-full transition-transform duration-500 flex flex-col hidden text-white">
+  <div class="p-8 border-b border-white/5 flex justify-between items-center">
+    <div>
+      <span id="drawer-tag" class="text-[9px] uppercase tracking-[0.3em] text-[#e0a96d] font-bold">Details</span>
+      <h2 id="drawer-title" class="text-2xl font-bold tracking-tight mt-1">Order Details</h2>
+    </div>
+    <button onclick="closeDrawer()" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 text-gray-400 hover:text-white transition"><i class="bi bi-x-lg"></i></button>
+  </div>
+  
+  <div class="p-8 flex-1 overflow-y-auto no-scrollbar space-y-8">
+    <div id="drawer-img-wrapper" class="rounded-3xl overflow-hidden border border-white/10 h-64 shadow-2xl"><img id="drawer-img" class="w-full h-full object-cover"></div>
+    <div class="grid gap-6">
+      <input type="text" placeholder="Address in Makurdi..." class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm outline-none transition focus:border-[#e0a96d]/40 focus:bg-white/[0.05]">
+      <input type="datetime-local" class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm outline-none text-gray-400 transition focus:border-[#e0a96d]/40 focus:bg-white/[0.05]">
+      <textarea rows="4" placeholder="Your Specifications..." class="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-sm outline-none resize-none transition focus:border-[#e0a96d]/40 focus:bg-white/[0.05]"></textarea>
+    </div>
+  </div>
+  
+  <div class="p-8 border-t border-white/5 bg-black/40">
+    <div class="flex justify-between items-baseline mb-6">
+      <span class="text-xs text-gray-400 uppercase tracking-wider">Base Price</span>
+      <span id="drawer-price" class="text-2xl font-bold text-white">₦0</span>
+    </div>
+    <a href="https://wa.me/2348113761904?text=I'd+like+to+book+the+Double+Chocolate+cupcake" 
+   target="_blank"
+   class="block text-center w-full btn-floral-action py-4 rounded-xl font-bold text-sm uppercase tracking-wider">
+   Proceed to Booking
+</a>
+
+  </div>
+</div>
+
+<!-- Shopping Bag Drawer -->
+<div id="cart-drawer" class="fixed inset-y-0 right-0 w-full sm:w-[450px] bg-black/85 border-l border-white/10 backdrop-blur-2xl z-[110] translate-x-full transition-transform duration-500 flex flex-col hidden text-white">
+  <div class="p-8 border-b border-white/5 flex justify-between items-center">
+    <h2 class="text-2xl font-bold tracking-tight">Shopping Bag</h2>
+    <button onclick="toggleCart()" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/10 text-gray-400 hover:text-white transition"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div id="cart-items" class="p-8 flex-1 overflow-y-auto no-scrollbar space-y-6"></div>
+  
+  <div class="p-8 border-t border-white/5 bg-black/40">
+    <div class="flex justify-between items-baseline mb-6">
+      <span class="text-xs text-gray-400 uppercase tracking-widest">Total</span>
+      <span id="cart-total" class="text-3xl font-bold text-white">₦0</span>
+    </div>
+    <button onclick="sendOrderToWhatsApp()" class="w-full btn-floral-action py-5 rounded-2xl font-black text-[11px] uppercase tracking-widest flex items-center justify-center gap-3">
+      <i class="bi bi-whatsapp text-lg"></i>
+      Finalize Order via WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- Toast Container Placeholder -->
+<div id="toast-container" class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[200]"></div>
+
+<!-- Review Submission Section -->
+
+  </div>
+</div>
+
+<!-- Reviews Render Output Grid -->
+<div id="reviews-container" class="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto px-6"></div>
+
+<!-- The Trigger -->
+<div class="text-center mt-12">
+    <button onclick="document.getElementById('review-modal').classList.remove('hidden')" 
+            class="text-[#e0a96d] uppercase tracking-[0.2em] text-[10px] border border-[#e0a96d]/30 px-8 py-3 rounded-full hover:bg-[#e0a96d] hover:text-black transition">
+        Share Your Experience
+    </button>
+</div>
+
+<!-- The Minimalist Modal -->
+<div id="review-modal" class="fixed inset-0 bg-black/90 hidden z-50 flex items-center justify-center p-6 backdrop-blur-sm">
+    <div class="bg-neutral-900 border border-white/10 p-8 rounded-[2.5rem] max-w-md w-full shadow-2xl">
+        <h3 class="text-white text-lg font-bold mb-6 text-center">Share Your Experience</h3>
+        
+        <input type="text" id="rev-name" placeholder="Your Name" 
+               class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 mb-4 text-white text-sm outline-none focus:border-[#e0a96d]">
+        
+        <textarea id="rev-text" rows="3" placeholder="How was your experience?" 
+                  class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-4 mb-6 text-white text-sm outline-none resize-none focus:border-[#e0a96d]"></textarea>
+        
+        <div class="flex gap-4">
+            <button onclick="document.getElementById('review-modal').classList.add('hidden')" 
+                    class="flex-1 text-gray-500 text-xs uppercase tracking-widest py-3">Cancel</button>
+            <button onclick="submitReview()" 
+                    class="flex-1 bg-[#e0a96d] text-black rounded-2xl font-bold text-xs uppercase tracking-widest py-3 hover:bg-white transition">Post</button>
+        </div>
+    </div>
+</div>
+
+<!-- Client Experiences Section -->
+<section class="max-w-7xl mx-auto px-6 py-24 border-t border-white/5 text-white">
+  <div class="flex flex-col items-center text-center mb-16">
+    <span class="text-[10px] uppercase tracking-[0.4em] text-[#e0a96d] mb-4 block font-semibold">Client Experiences</span>
+    <h2 class="text-4xl font-bold tracking-tighter">Trusted by Makurdi's <br> <span class="hero-gradient">Finest Celebrations.</span></h2>
+  </div>
+
+<section class="max-w-2xl mx-auto px-6 py-24 text-center">
+  <span class="text-[10px] uppercase tracking-[0.4em] text-[#e0a96d] mb-4 block font-semibold">Client Experiences</span>
+  
+  <div class="relative overflow-hidden">
+    <!-- Carousel Track -->
+    <div id="testimonial-carousel" class="flex transition-transform duration-700 ease-in-out">
+      <!-- Reviews will be injected here via JavaScript -->
+    </div>
+    
+    <!-- Minimalist Controls -->
+    <div class="flex justify-center gap-6 mt-10">
+      <button onclick="moveCarousel(-1)" class="text-white/30 hover:text-[#e0a96d] transition"><i class="bi bi-arrow-left"></i></button>
+      <button onclick="moveCarousel(1)" class="text-white/30 hover:text-[#e0a96d] transition"><i class="bi bi-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+</section>
+
+<!-- Luxury Brand Footer -->
+<footer class="relative mt-20 border-t border-neutral-900 bg-black text-neutral-300 font-sans overflow-hidden">
+    
+    <!-- Top Decorative Subtle Glow Divider -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-gradient-to-r from-transparent via-[#e0a96d]/40 to-transparent"></div>
+
+    <div class="max-w-7xl mx-auto px-6 pt-16 pb-8">
+        <!-- Main Footer Links Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+            
+            <!-- Brand Column -->
+            <div class="space-y-4">
+                <a href="#home" class="inline-block group">
+                    <span class="text-xl font-bold tracking-widest uppercase text-white bg-gradient-to-r from-[#e0a96d] via-white to-[#e0a96d] bg-clip-text text-transparent group-hover:opacity-90 transition-opacity">
+                        Cyndy Bakes N More
+                    </span>
+                    <span class="block text-[10px] tracking-[0.25em] uppercase text-[#e0a96d]/80 mt-1 font-medium">Bespoke Baking & Design</span>
+                </a>
+                <p class="text-sm text-gray-400 leading-relaxed pt-2">
+                    Crafting edible luxury and avant-garde confectionery structures for life’s most celebrated milestones. Every creation is an individual masterpiece.
+                </p>
+                
+                <!-- Social Media Action Icons -->
+                <div class="flex items-center space-x-4 pt-4">
+                    <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/[0.02] border border-white/5 text-gray-400 hover:text-[#e0a96d] hover:border-[#e0a96d]/40 hover:bg-white/[0.05] transition-all duration-300" aria-label="Instagram">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"></path></svg>
+                    </a>
+                    <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/[0.02] border border-white/5 text-gray-400 hover:text-[#e0a96d] hover:border-[#e0a96d]/40 hover:bg-white/[0.05] transition-all duration-300" aria-label="Facebook">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.8z"></path></svg>
+                    </a>
+                    <a href="#" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/[0.02] border border-white/5 text-gray-400 hover:text-[#e0a96d] hover:border-[#e0a96d]/40 hover:bg-white/[0.05] transition-all duration-300" aria-label="Pinterest">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.27 2.68 7.91 6.46 9.33-.09-.8-.17-2.03.04-2.91.19-.8 1.24-5.27 1.24-5.27s-.32-.64-.32-1.59c0-1.49.86-2.6 1.94-2.6.91 0 1.36.69 1.36 1.51 0 .92-.59 2.3-.89 3.57-.25 1.07.54 1.93 1.59 1.93 1.91 0 3.38-2.01 3.38-4.92 0-2.57-1.85-4.37-4.48-4.37-3.05 0-4.84 2.29-4.84 4.65 0 .92.35 1.91.8 2.46.09.1.1.19.07.31l-.3 1.22c-.05.2-.16.24-.37.14-1.39-.65-2.26-2.68-2.26-4.32 0-3.52 2.56-6.75 7.37-6.75 3.87 0 6.87 2.76 6.87 6.44 0 3.85-2.43 6.94-5.79 6.94-1.13 0-2.2-.59-2.56-1.28l-.7 2.66c-.25.97-.94 2.19-1.4 2.94C10.05 21.84 11 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"></path></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Collections Navigation Links -->
+            <div class="space-y-4">
+                <h4 class="text-xs tracking-[0.3em] font-bold text-white uppercase border-b border-white/5 pb-2">The Collections</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#new collections" class="text-gray-400 hover:text-[#e0a96d] transition-colors duration-200 flex items-center group"><span class="w-0 group-hover:w-2 h-px bg-[#e0a96d] mr-0 group-hover:mr-2 transition-all"></span>Signature Wedding Cakes</a></li>
+                    <li><a href="#celebration" class="text-gray-400 hover:text-[#e0a96d] transition-colors duration-200 flex items-center group"><span class="w-0 group-hover:w-2 h-px bg-[#e0a96d] mr-0 group-hover:mr-2 transition-all"></span>Luxury Celebration Tiers</a></li>
+                    <li><a href="#confections" class="text-gray-400 hover:text-[#e0a96d] transition-colors duration-200 flex items-center group"><span class="w-0 group-hover:w-2 h-px bg-[#e0a96d] mr-0 group-hover:mr-2 transition-all"></span>Artisan Gifting Boxes</a></li>
+                    <li><a href="#consultation" class="text-gray-400 hover:text-[#e0a96d] transition-colors duration-200 flex items-center group"><span class="w-0 group-hover:w-2 h-px bg-[#e0a96d] mr-0 group-hover:mr-2 transition-all"></span>Private Tasting & Design</a></li>
+                </ul>
+            </div>
+
+            <!-- Studio Atelier Hours -->
+            <div class="space-y-4">
+                <h4 class="text-xs tracking-[0.3em] font-bold text-white uppercase border-b border-white/5 pb-2">Atelier Hours</h4>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li class="flex justify-between border-b border-white/5 pb-1">
+                        <span>Monday — Friday</span>
+                        <span class="text-white font-medium">09:00 - 18:00</span>
+                    </li>
+                    <li class="flex justify-between border-b border-white/5 pb-1">
+                        <span>Saturday Studio</span>
+                        <span class="text-white font-medium">10:00 - 16:00</span>
+                    </li>
+                    <li class="flex justify-between pb-1">
+                        <span>Sunday Consultations</span>
+                        <span class="text-[#e0a96d] font-semibold tracking-wide text-xs uppercase">By Appointment Only</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Guestlist Newsletter Form -->
+<!-- The Guestlist Section -->
+<div class="mt-12 text-center">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfUFYk0XcA_sRKJJ6zzxboOVQAotcCdbEMEnDbwRmdJVfqtWQ/viewform?usp=header" target="_blank" 
+       class="inline-block w-full max-w-sm py-4 text-center bg-[#e0a96d]/10 border border-[#e0a96d]/30 rounded-2xl text-white font-bold uppercase tracking-widest hover:bg-[#e0a96d] hover:text-black transition">
+       Join The Guestlist
+    </a>
+</div>
+
+
+
+        <!-- Footer Bottom Separator -->
+        <div class="border-t border-white/5 my-8"></div>
+
+        <!-- Copyright & Technical Portal Access Link -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+            <div>
+                
+            </div>
+           <!-- Footer Links Section -->
+
+    
+<!-- Footer Links Section -->
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 mt-12 border-t border-white/5 pt-8">
+    <!-- Copyright -->
+    <p class="text-xs text-gray-500 tracking-wider">© 2026 Cyndy Bakes N More. All Rights Reserved. Crafted with absolute precision.</p>
+    
+    <!-- Unified Links -->
+    <div class="flex space-x-8 items-center text-[10px] uppercase tracking-[0.2em] text-gray-400">
+        <!-- Order Terms -->
+        <button onclick="openModal('terms-modal')" class="hover:text-[#e0a96d] transition-colors">Order Terms</button>
+        
+        <!-- Privacy Charter -->
+        <button onclick="openModal('privacy-modal')" class="hover:text-[#e0a96d] transition-colors">Privacy Charter</button>
+        
+        <!-- Atelier Portal -->
+        <a href="/admin/login" class="hover:text-[#e0a96d] transition-all flex items-center gap-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#e0a96d] animate-pulse"></span>
+            Atelier Portal
+        </a>
+    </div>
+</div>
+
+<!-- Modal Structure (Place this before your closing </body> tag) -->
+<div id="terms-modal" class="fixed inset-0 bg-black/95 hidden flex items-center justify-center p-8 z-50">
+    <div class="max-w-xl text-center">
+        <h2 class="text-white text-lg mb-6 uppercase tracking-widest">Order Terms</h2>
+        <div class="text-gray-400 text-xs leading-relaxed space-y-4 text-left">
+            <p><strong>Design Consultations:</strong> All bespoke commissions require an initial consultation to ensure absolute precision in design.</p>
+            <p><strong>Reservation Policy:</strong> A non-refundable deposit is mandatory to secure your date within the studio calendar.</p>
+            <p><strong>Modification Deadline:</strong> All design alterations or order adjustments must be finalized no less than 72 hours prior to the production date.</p>
+            <p><strong>Delivery Standards:</strong> Deliveries are executed during dedicated windows to maintain the integrity of our luxury tiers.</p>
+        </div>
+        <button onclick="closeModal('terms-modal')" class="mt-8 text-[#e0a96d] uppercase text-[10px] tracking-[0.2em]">Close</button>
+    </div>
+</div>
+
+<!-- Privacy Charter Modal -->
+<div id="privacy-modal" class="fixed inset-0 bg-black/95 hidden flex items-center justify-center p-8 z-50">
+    <div class="max-w-xl text-center">
+        <h2 class="text-white text-lg mb-6 uppercase tracking-widest">Privacy Charter</h2>
+        <div class="text-gray-400 text-xs leading-relaxed space-y-4 text-left">
+            <p><strong>Professional Discretion:</strong> Client event details and personal information are handled with absolute confidentiality.</p>
+            <p><strong>Data Integrity:</strong> Data is encrypted and utilized strictly for the coordination and fulfillment of your bespoke order.</p>
+            <p><strong>Communication Policy:</strong> We maintain a strict no-solicitation policy; updates are sent solely to members of "The Guestlist".</p>
+            <p><strong>Information Security:</strong> We do not disclose, distribute, or sell client information to external third parties.</p>
+        </div>
+        <button onclick="closeModal('privacy-modal')" class="mt-8 text-[#e0a96d] uppercase text-[10px] tracking-[0.2em]">Close</button>
+    </div>
+</div>
+
+<script>
+function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+</script>
+
+<script>
+function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+</script>
+
+</footer>
+
+
+<script>
+  
+  const baseCatalog = [
+    { id: 'c1', name: "Double Chocolate", category: "Cakes", tag: "Luxury", price: 24000, img: "choc3.jpg", status: "Published" },
+    { id: 'c2', name: "Classic Vanilla", category: "Cakes", tag: "Seasonal", price: 21000, img: "val.jpg", status: "Published" },
+    { id: 'c3', name: "Strawberry Red", category: "Cakes", tag: "Popular", price: 12000, img: "straw.jpg", status: "Published" },
+    { id: 'c4', name: "Royal Fruit", category: "Cakes", tag: "Luxury", price: 15000, img: "fruit.jpg", status: "Published" },
+    { id: 'c5', name: "Red Velvet", category: "Cakes", tag: "Premium", price: 18000, img: "red.jpg", status: "Published" },
+    { id: 'c6', name: "Oreo Crunch", category: "Cakes", tag: "Modern", price: 22000, img: "oreo.jpg", status: "Published" },
+    { id: 'c7', name: "Caramel Drip", category: "Cakes", tag: "Luxury", price: 26000, img: "caramel.jpg", status: "Published" },
+    { id: 'c8', name: "Cheese cake", category: "Cakes", tag: "Classic", price: 19000, img: "white.jpg", status: "Published" },
+    { id: 'c9', name: "Lemon Zest", category: "Cakes", tag: "Fresh", price: 16000, img: "lemon.jpg", status: "Published" },
+    { id: 'c10', name: "Coconut Cream", category: "Cakes", tag: "Tropical", price: 17500, img: "coco.jpg", status: "Published" },
+    { id: 'c11', name: "Pink Marble", category: "Cakes", tag: "Artisan", price: 23000, img: "marble.jpg", status: "Published" },
+    { id: 'm1', name: "Amala & Ewedu", category: "Meal-Time", tag: "Traditional", price: 5000, img: "meal1.jpg", status: "Published" },
+    { id: 'm2', name: "Party Jollof", category: "Meal-Time", tag: "Classic", price: 4500, img: "meal2.jpg", status: "Published" },
+    { id: 'm3', name: "Fried Rice Combo", category: "Meal-Time", tag: "Premium", price: 5500, img: "meal3.jpg", status: "Published" },
+    { id: 'm4', name: "Pounded Yam", category: "Meal-Time", tag: "Traditional", price: 6000, img: "meal4.jpg", status: "Published" },
+    { id: 'm5', name: "Creamy Pasta", category: "Meal-Time", tag: "Italian", price: 7000, img: "meal5.jpg", status: "Published" },
+    { id: 'm6', name: "Grilled Fish", category: "Meal-Time", tag: "Protein", price: 8500, img: "meal6.jpg", status: "Published" },
+    { id: 'm7', name: "Spicy Wings", category: "Meal-Time", tag: "Sides", price: 4000, img: "meal7.jpg", status: "Published" },
+    { id: 'm8', name: "Fruit Bowl", category: "Meal-Time", tag: "Healthy", price: 3500, img: "meal8.jpg", status: "Published" },
+    { id: 'm9', name: "Catfish Soup", category: "Meal-Time", tag: "Traditional", price: 5500, img: "meal9.jpg", status: "Published" },
+    { id: 'm10', name: "Rice & Beans", category: "Meal-Time", tag: "Classic", price: 4000, img: "meal10.jpg", status: "Published" },
+    { id: 'm11', name: "Yam Porridge", category: "Meal-Time", tag: "Traditional", price: 4500, img: "meal11.jpg", status: "Published" },
+    { id: 'm12', name: "Gizz-Dodo", category: "Meal-Time", tag: "Signature", price: 5000, img: "meal12.jpg", status: "Published" },
+    { id: 'p1', name: "Classic Red Roses", category: "Packages", tag: "Romantic", price: 15000, img: "rose1.jpg", status: "Published" },
+    { id: 'p2', name: "Money Bouquets", category: "Packages", tag: "Elegant", price: 18500, img: "money.jpg", status: "Published" },
+    { id: 'p3', name: "The Birthday Bundle", category: "Packages", tag: "Bundle", price: 45000, img: "gift1.jpg", status: "Published" },
+    { id: 'p4', name: "flower Bouquet", category: "Packages", tag: "Seasonal", price: 12000, img: "fbouquet.jpg", status: "Published" },
+    { id: 'p5', name: "Luxury Gift Basket", category: "Packages", tag: "Fresh", price: 25000, img: "basket.jpg", status: "Published" },
+    { id: 'p6', name: "Wine & Chocolate Box", category: "Packages", tag: "Luxury", price: 35000, img: "wine-choc.jpg", status: "Published" },
+    { id: 'p7', name: "Mixed Gerberas", category: "Packages", tag: "Vibrant", price: 14000, img: "gerb.jpg", status: "Published" },
+    { id: 'p8', name: "Orchid Elegance", category: "Packages", tag: "Premium", price: 22000, img: "orchid.jpg", status: "Published" },
+    { id: 'p9', name: "Pamper Hamper", category: "Packages", tag: "Self-Care", price: 40000, img: "pamper.jpg", status: "Published" },
+    { id: 'p10', name: "Eternal Bloom (Dried)", category: "Packages", tag: "Lasting", price: 28000, img: "dried.jpg", status: "Published" },
+    { id: 'p11', name: "Baby Welcome Kit", category: "Packages", tag: "Newborn", price: 32000, img: "baby.jpg", status: "Published" },
+    { id: 'p12', name: "Tulip Fantasy", category: "Packages", tag: "Imported", price: 30000, img: "tulip.jpg", status: "Published" },
+        { id: 'cel1', name: "Birthday", category: "Celebrations", tag: "Luxury", price: 145000, img: "birthday.jpg", status: "Published" },
+    { id: 'cel2', name: "Annivesary", category: "Celebrations", tag: "Elegant", price: 180000, img: "anniversary.jpg", status: "Published" },
+    { id: 'cel3', name: "Emerald Cube", category: "Celebrations", tag: "Modern", price: 160000, img: "emerald.jpg", status: "Published" },
+    { id: 'cel4', name: "Graduation", category: "Celebrations", tag: "Couture", price: 155000, img: "graduation.jpg", status: "Published" },
+    { id: 'cel5', name: "Wedding ", category: "Celebrations", tag: "Classic", price: 195000, img: "wedding.jpg", status: "Published" },
+    { id: 'cel6', name: "Obsidian Glass", category: "Celebrations", tag: "Artistic", price: 210000, img: "obsidian.jpg", status: "Published" },
+    { id: 'cel7', name: "Botanical Gilt", category: "Celebrations", tag: "Floral", price: 150000, img: "botanical.jpg", status: "Published" },
+    { id: 'cel8', name: "Brutalist Stone", category: "Celebrations", tag: "Minimal", price: 140000, img: "concrete.jpg", status: "Published" },
+    { id: 'cel9', name: "Opal Shimmer", category: "Celebrations", tag: "Lustre", price: 175000, img: "opal.jpg", status: "Published" },
+    { id: 'cel10', name: "Mosaic Tile", category: "Celebrations", tag: "Bespoke", price: 165000, img: "mosaic.jpg", status: "Published" },
+    { id: 'cel11', name: "Sapphire Fissure", category: "Celebrations", tag: "Masterpiece", price: 225000, img: "sapphire.jpg", status: "Published" },
+    { id: 'cel12', name: "Venetian Velvet", category: "Celebrations", tag: "Vintage", price: 185000, img: "venetian.jpg", status: "Published" },
+        { id: 'd1', name: "Artisan Baguette", category: "-Deli", tag: "Fresh", price: 3500, img: "deli1.jpg", status: "Published" },
+    { id: 'd2', name: "Smoked Turkey Sub", category: "Daily-Deli", tag: "Classic", price: 8500, img: "deli2.jpg", status: "Published" },
+    { id: 'd3', name: "Greek Salad Bowl", category: "Daily-Deli", tag: "Healthy", price: 6000, img: "deli3.jpg", status: "Published" },
+    { id: 'd4', name: "Pastrami Melt", category: "Daily-Deli", tag: "Signature", price: 9500, img: "deli4.jpg", status: "Published" },
+    { id: 'd5', name: "Egg Salad Pot", category: "Daily-Deli", tag: "Protein", price: 4500, img: "deli5.jpg", status: "Published" },
+    { id: 'd6', name: "Cold Brew Coffee", category: "Daily-Deli", tag: "Chilled", price: 3000, img: "deli6.jpg", status: "Published" },
+    { id: 'd7', name: "Club Sandwich", category: "Daily-Deli", tag: "Popular", price: 7500, img: "deli7.jpg", status: "Published" },
+    { id: 'd8', name: "Hummus & Pita", category: "Daily-Deli", tag: "Vegan", price: 5000, img: "deli8.jpg", status: "Published" },
+    { id: 'd9', name: "Fruit Parfait", category: "Daily-Deli", tag: "Fresh", price: 4000, img: "deli9.jpg", status: "Published" },
+    { id: 'd10', name: "Beef Bresaola", category: "Daily-Deli", tag: "Luxury", price: 12000, img: "deli10.jpg", status: "Published" },
+    { id: 'd11', name: "Assorted Olives", category: "Daily-Deli", tag: "Artisan", price: 3500, img: "deli11.jpg", status: "Published" },
+    { id: 'd12', name: "Cheese Selection", category: "Daily-Deli", tag: "Premium", price: 15000, img: "deli12.jpg", status: "Published" }
+
+
+  ];
+
+  let cart = [];
+
+  if (!localStorage.getItem('shared_products')) {
+      localStorage.setItem('shared_products', JSON.stringify(baseCatalog));
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+      syncAndRenderCatalog();
+  });
+
+  function syncAndRenderCatalog() {
+      const currentItems = JSON.parse(localStorage.getItem('shared_products')) || baseCatalog;
+      
+      const cakeGrid = document.querySelector('#new-collections .grid');
+      const mealGrid = document.querySelector('#Meal-Time .grid');
+      const packageGrid = document.querySelector('#Packages .grid');
+
+      // PHASE 1: Update Hardcoded Cards
+      const htmlCards = document.querySelectorAll('.catalog-card');
+      htmlCards.forEach(card => {
+          const titleEl = card.querySelector('h3');
+          if (!titleEl) return;
+          const cardName = titleEl.innerText.trim();
+          const adminData = currentItems.find(p => p.name.trim() === cardName);
+          
+          if (adminData) {
+              if (adminData.status === 'Draft') { card.classList.add('hidden'); return; }
+              else { card.classList.remove('hidden'); }
+
+              const priceEl = card.querySelector('p');
+              if (priceEl) priceEl.innerText = `₦${parseFloat(adminData.price).toLocaleString()}`;
+
+              const imgEl = card.querySelector('img');
+              if (imgEl && adminData.img) imgEl.src = adminData.img;
+
+              const safeName = adminData.name.replace(/'/g, "\\'");
+              const imgContainer = card.querySelector('.img-container');
+              if (imgContainer) imgContainer.setAttribute('onclick', `openDrawer('${safeName}', '${adminData.tag || 'Fresh'}', ${adminData.price}, '${adminData.img}')`);
+
+              const actionBtn = card.querySelector('button');
+              if (actionBtn) actionBtn.setAttribute('onclick', `addToCart('${safeName}', ${adminData.price}, '${adminData.img}'); event.stopPropagation();`);
+          }
+      });
+
+      
+      currentItems.forEach(item => {
+          const isNewItem = !baseCatalog.some(base => base.name.toLowerCase().trim() === item.name.toLowerCase().trim());
+          
+          if (isNewItem && item.status === 'Published') {
+              const safeName = item.name.replace(/'/g, "\\'");
+              const cardHTML = `
+                <div class="catalog-card p-4 group">
+                  <div class="img-container mb-4 cursor-pointer" onclick="openDrawer('${safeName}', '${item.tag || 'Fresh'}', ${item.price}, '${item.img}')">
+                    <img src="${item.img}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" onerror="this.src='https://placehold.co/400x400?text=${encodeURIComponent(item.name)}'">
+                  </div>
+                  <div class="px-2">
+                    <h3 class="text-sm font-bold truncate">${item.name}</h3>
+                    <p class="text-[10px] text-dim uppercase mt-1">₦${parseFloat(item.price).toLocaleString()}</p>
+                    <button onclick="addToCart('${safeName}', ${item.price}, '${item.img}'); event.stopPropagation();" class="mt-3 w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-bold hover:bg-white hover:text-black transition uppercase">Add to Bag</button>
+                  </div>
+                </div>
+              `;
+
+              if (item.category === 'Cakes' && cakeGrid) {
+                  cakeGrid.insertAdjacentHTML('beforeend', cardHTML);
+              } else if (item.category === 'Meal-Time' && mealGrid) {
+                  mealGrid.insertAdjacentHTML('beforeend', cardHTML);
+              } else if (item.category === 'Packages' && packageGrid) {
+                  packageGrid.insertAdjacentHTML('beforeend', cardHTML);
+              }
+          }
+      });
+  }
+
+  
+  const toggleCart = () => {
+    const c = document.getElementById('cart-drawer');
+    if (!c) return;
+    c.classList.toggle('hidden');
+    setTimeout(() => c.classList.toggle('translate-x-full'), 10);
+  };
+
+  const openDrawer = (title, tag, price, imgSrc, isCustom = false) => {
+    const d = document.getElementById('detail-drawer');
+    const iw = document.getElementById('drawer-img-wrapper');
+    if (!d) return;
+    document.getElementById('drawer-title').innerText = title;
+    document.getElementById('drawer-tag').innerText = tag;
+    document.getElementById('drawer-price').innerText = typeof price === 'number' ? "₦" + price.toLocaleString() : price;
+    if (!isCustom && iw) { iw.classList.remove('hidden'); document.getElementById('drawer-img').src = imgSrc; }
+    d.classList.remove('hidden');
+    setTimeout(() => d.classList.remove('translate-x-full'), 10);
+  };
+
+  const closeDrawer = () => {
+    const d = document.getElementById('detail-drawer');
+    if (d) { d.classList.add('translate-x-full'); setTimeout(() => d.classList.add('hidden'), 500); }
+  };
+
+  function addToCart(name, price, img) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) { existing.q++; } else { cart.push({ name, price, img, q: 1 }); }
+    updateUI();
+    showToast(name + " added to bag");
+  }
+
+  function removeFromCart(name) {
+    cart = cart.filter(item => item.name !== name);
+    updateUI();
+  }
+
+  function updateUI() {
+    const list = document.getElementById('cart-items');
+    const badge = document.getElementById('cart-count');
+    const totalDisplay = document.getElementById('cart-total');
+    const total = cart.reduce((sum, i) => sum + (i.price * i.q), 0);
+    const count = cart.reduce((sum, i) => sum + i.q, 0);
+    if (badge) { badge.innerText = count; badge.classList.toggle('hidden', count === 0); }
+    if (totalDisplay) totalDisplay.innerText = "₦" + total.toLocaleString();
+    if (!list) return;
+    if (cart.length === 0) { list.innerHTML = '<p class="text-dim text-center mt-20 text-[10px] uppercase tracking-widest">Your bag is empty</p>'; return; }
+    list.innerHTML = cart.map(i => `<div class="flex items-center gap-4 group"><img src="${i.img}" class="w-16 h-16 rounded-xl object-cover border border-white/5"><div class="flex-1"><h4 class="text-sm font-bold">${i.name}</h4><p class="text-[10px] text-dim">₦${i.price.toLocaleString()} x ${i.q}</p></div><button onclick="removeFromCart('${i.name.replace(/'/g, "\\'")}')" class="text-dim hover:text-white transition"><i class="bi bi-trash"></i></button></div>`).join('');
+  }
+
+  function showToast(msg) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = 'bg-white text-black px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-widest shadow-2xl mb-4 toast-anim';
+    toast.innerText = msg;
+    container.appendChild(toast);
+    setTimeout(() => { toast.remove(); }, 3000);
+  }
+
+  function sendOrderToWhatsApp() {
+    if (cart.length === 0) return;
+    const total = cart.reduce((sum, i) => sum + (i.price * i.q), 0);
+    let message = `*NEW ORDER FROM WEBSITE*%0A---------------------------%0A`;
+    cart.forEach((item, index) => { message += `${index + 1}. *${item.name}* (x${item.q}) - ₦${(item.price * item.q).toLocaleString()}%0A`; });
+    message += `---------------------------%0A*GRAND TOTAL: ₦${total.toLocaleString()}*`;
+    window.open(`https://wa.me/2348113761904?text=${message}`, '_blank');
+  }
+
+  
+  document.addEventListener('DOMContentLoaded', () => {
+      const trigger = document.getElementById('admin-secret-trigger');
+      let pressTimer;
+      const startPress = () => { pressTimer = setTimeout(() => { window.location.href = "cyndy-admin.html"; }, 3000); };
+      const cancelPress = () => clearTimeout(pressTimer);
+      if(trigger) {
+          trigger.addEventListener('mousedown', startPress);
+          trigger.addEventListener('mouseup', cancelPress);
+          trigger.addEventListener('touchstart', startPress);
+          trigger.addEventListener('touchend', cancelPress);
+      }
+  });
+  function openStrategyModal() {
+    const modal = document.getElementById('strategyModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden'; 
+}
+
+function closeStrategyModal() {
+    const modal = document.getElementById('strategyModal');
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+    document.body.style.overflow = 'auto'; 
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById('strategyModal');
+    if (event.target == modal) {
+        closeStrategyModal();
+    }
+}
+function subscribeToGuestlist(event) {
+    event.preventDefault(); // Prevents page reload
+    
+    // 1. Show the success message by removing the 'hidden' class
+    const msg = document.getElementById('success-msg');
+    msg.classList.remove('hidden');
+    
+    // 2. Clear the input field
+    event.target.querySelector('input').value = '';
+    
+    // 3. Optional: Hide the message again after 3 seconds
+    setTimeout(() => {
+        msg.classList.add('hidden');
+    }, 3000);
+}
+function submitReview() {
+    const name = document.getElementById('rev-name').value.trim();
+    const comment = document.getElementById('rev-text').value.trim();
+    const container = document.getElementById('reviews-container');
+
+    if (!name || !comment) {
+        alert("Please enter both your name and your experience.");
+        return;
+    }
+
+    // 1. Create the data object
+    const newReviewData = { name, comment };
+
+    // 2. Save to localStorage
+    const savedReviews = JSON.parse(localStorage.getItem('myReviews') || '[]');
+    savedReviews.unshift(newReviewData); // Add new to start
+    localStorage.setItem('myReviews', JSON.stringify(savedReviews));
+
+    // 3. Render and Close
+    addReviewToPage(name, comment);
+    document.getElementById('review-modal').classList.add('hidden');
+    document.getElementById('rev-name').value = '';
+    document.getElementById('rev-text').value = '';
+}
+
+// Helper to add review to page
+function addReviewToPage(name, comment) {
+    const container = document.getElementById('reviews-container');
+    const newReview = document.createElement('div');
+    newReview.className = "review-item glass-card p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/10 mb-4 animate-fade-in";
+    newReview.innerHTML = `
+        <p class="text-gray-300 italic text-sm">"${comment}"</p>
+        <h4 class="text-xs font-bold text-[#e0a96d] mt-2">${name}</h4>
+    `;
+    container.prepend(newReview);
+}
+// Load saved reviews on page refresh
+window.onload = function() {
+    const savedReviews = JSON.parse(localStorage.getItem('myReviews') || '[]');
+    savedReviews.forEach(rev => addReviewToPage(rev.name, rev.comment));
+};
+
+// Load reviews when the page opens
+window.onload = function() {
+    renderCarousel();
+};
+
+function submitReview() {
+    const name = document.getElementById('rev-name').value.trim();
+    const comment = document.getElementById('rev-text').value.trim();
+
+    if (!name || !comment) return;
+
+    // 1. Get existing reviews or create new array
+    const reviews = JSON.parse(localStorage.getItem('myReviews') || '[]');
+
+    // 2. Add new review to the array
+    reviews.push({ name, comment, type: 'Client' });
+    localStorage.setItem('myReviews', JSON.stringify(reviews));
+
+    // 3. Clear inputs and close modal
+    document.getElementById('rev-name').value = '';
+    document.getElementById('rev-text').value = '';
+    document.getElementById('review-modal').classList.add('hidden');
+
+    // 4. Refresh the carousel
+    renderCarousel();
+}
+
+function renderCarousel() {
+    const carousel = document.getElementById('testimonial-carousel');
+    const reviews = JSON.parse(localStorage.getItem('myReviews') || '[]');
+
+    if (reviews.length === 0) return;
+
+    carousel.innerHTML = reviews.map(r => `
+        <div class="testimonial-card min-w-full p-8">
+            <p class="text-gray-200 leading-relaxed italic text-lg mb-8">"${r.comment}"</p>
+            <h4 class="text-sm font-bold text-[#e0a96d]">${r.name}</h4>
+            <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-1">${r.type}</p>
+        </div>
+    `).join('');
+}
+
+// Carousel movement logic
+let currentIndex = 0;
+function moveCarousel(direction) {
+    const carousel = document.getElementById('testimonial-carousel');
+    const items = carousel.querySelectorAll('.testimonial-card');
+    if (items.length === 0) return;
+    
+    currentIndex = (currentIndex + direction + items.length) % items.length;
+    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+}
+// Add this to your main script to handle access
+function handleAtelierLogin(event) {
+    event.preventDefault();
+    const key = document.getElementById('access-key').value;
+    // Replace 'YOUR_SECURE_KEY' with your actual secret key
+    if (key === 'YOUR_SECURE_KEY') {
+        window.location.href = '/admin/dashboard'; 
+    } else {
+        alert('Access Denied: Precision Required.');
+    }
+}
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+<div id="strategyModal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 backdrop-blur-md bg-black/60">
+    <div class="glass-card max-w-md w-full p-8 rounded-[2.5rem] border border-white/10 relative">
+        <button onclick="closeStrategyModal()" class="absolute top-6 right-6 text-white/50 hover:text-white transition text-xl">&times;</button>
+        
+        <div class="text-center">
+            <div class="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span class="text-2xl">🤝</span>
+            </div>
+            <h2 class="text-2xl font-bold mb-2">Luxury Strategy Call</h2>
+            <p class="text-dim text-xs tracking-widest uppercase mb-8">Custom Catering • Event Styling • Corporate</p>
+            
+            <p class="text-sm text-white/80 leading-relaxed mb-8 text-left border-l-2 border-yellow-500 pl-4">
+                Let's plan your milestone. This call is for bespoke orders exceeding ₦100k or event-based inquiries.
+            </p>
+
+            <div class="flex flex-col gap-4">
+<a href="https://api.whatsapp.com/send?phone=2348113761904&text=I'd+like+to+book+a+strategy+call+for+a+luxury+event" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   class="w-full py-4 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-widest hover:bg-yellow-500 transition">
+   Chat via WhatsApp
+</a>
+
+                
+<a href="https://mail.google.com/mail/?view=cm&fs=1&to=Cyndy2465@gmail.com&su=Strategy+Call+Request" 
+   target="_blank"
+   class="block text-center w-full py-4 rounded-full border border-white/20 text-[10px] font-black uppercase tracking-widest hover:bg-white/10 transition cursor-pointer">
+   Email Me via Gmail
+</a>
+
+
+            </div>
+            
+            <p class="mt-6 text-[9px] text-white/30 uppercase tracking-widest">Typical response time: < 2 hours</p>
+        </div>
+    </div>
+</div>
+<script type="module">
+  // Import the functions you need from the SDKs
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-analytics.js";
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyBcApjG7nUGvfGMm6k5ahiJ1AT5tjiN4no",
+    authDomain: "cyndy-bakes-n-more.firebaseapp.com",
+    projectId: "cyndy-bakes-n-more",
+    storageBucket: "cyndy-bakes-n-more.firebasestorage.app",
+    messagingSenderId: "52850809860",
+    appId: "1:52850809860:web:25ca5e123f90f8ee40a951",
+    measurementId: "G-1H2JEJKFXD"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+</body>
+</html>
