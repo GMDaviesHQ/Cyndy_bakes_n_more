@@ -1,11 +1,16 @@
 {
-  "background_color": "#ffffff",
-  "dir": "ltr",
-  "display": "standalone",
-  "name": "cyndybakesnmore.netlify",
-  "orientation": "any",
-  "scope": "/",
-  "short_name": "cyndybakesnmore.netlify",
+  "name": "Cyndy Bakes n More",
+  "short_name": "Cyndy Bakes",
+  "description": "Order delicious cakes and pastries from Cyndy Bakes n More",
   "start_url": "/",
-  "theme_color": "#ffffff"
+  "display": "standalone",
+  "background_color": "#fff0f5",
+  "theme_color": "#ff69b4",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
