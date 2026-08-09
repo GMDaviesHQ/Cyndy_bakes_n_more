@@ -1,0 +1,11 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "cyndybakesnmore.netlify",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "cyndybakesnmore.netlify",
+  "start_url": "/",
+  "theme_color": "#ffffff"
+}
