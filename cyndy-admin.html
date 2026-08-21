@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Admin Control Panel</title>
-    
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-gray-100 font-sans antialiased text-gray-900">
 
-    
+    <!-- Auth Gate Modal -->
     <div id="auth-gate" class="fixed inset-0 z-100 flex items-center justify-center bg-slate-950 px-4">
         <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
-            
-            
             <div id="auth-step-identity">
                 <div class="text-center mb-6">
                     <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-2xl mx-auto mb-3">
@@ -24,7 +20,6 @@
                     <h2 class="text-2xl font-bold text-gray-900">System Gateway</h2>
                     <p class="text-sm text-gray-500 mt-1">Select an identity profile signature to begin</p>
                 </div>
-                
                 <div class="space-y-3">
                     <button onclick="SecurityEngine.selectProfile('admin')" class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-blue-50 border border-gray-200 hover:border-blue-300 rounded-xl transition group text-left cursor-pointer">
                         <div>
@@ -33,7 +28,6 @@
                         </div>
                         <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-blue-500"></i>
                     </button>
-                    
                     <button onclick="SecurityEngine.selectProfile('editor')" class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-emerald-50 border border-gray-200 hover:border-emerald-300 rounded-xl transition group text-left cursor-pointer">
                         <div>
                             <div class="font-semibold text-gray-900 group-hover:text-emerald-900">Tall Dorcas</div>
@@ -44,20 +38,17 @@
                 </div>
             </div>
 
-            
             <div id="auth-step-password" class="hidden">
                 <div class="mb-4">
                     <button onclick="SecurityEngine.resetAuthWorkflow()" class="text-xs text-blue-600 hover:text-blue-800 flex items-center gap-1 font-medium cursor-pointer">
                         <i class="fa-solid fa-arrow-left-long"></i> Change Identity Profile
                     </button>
                 </div>
-                
                 <div class="text-center mb-6">
                     <img id="auth-target-avatar" src="" class="w-16 h-16 rounded-full mx-auto object-cover ring-4 ring-gray-100 mb-2">
                     <h3 id="auth-target-name" class="text-lg font-bold text-gray-900">User Profile</h3>
                     <p id="auth-target-role" class="text-xs text-gray-500 font-mono"></p>
                 </div>
-
                 <form id="form-auth-password" onsubmit="SecurityEngine.handlePasswordSubmit(event)" class="space-y-4">
                     <div>
                         <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Security Access Password</label>
@@ -72,50 +63,39 @@
                     </button>
                 </form>
             </div>
-
         </div>
     </div>
 
-    
+    <!-- Main Dashboard Wrapper -->
     <div id="app-wrapper" class="flex h-screen overflow-hidden hidden">
-        
-        
         <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white transform -translate-x-full transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0">
             <div class="flex items-center justify-between px-6 py-4 bg-slate-950">
                 <div class="flex items-center space-x-2">
                     <i class="fa-solid fa-gauge-high text-xl text-blue-500"></i>
                     <span class="text-xl font-bold tracking-wider">CORE_ADMIN</span>
                 </div>
-                <button id="close-sidebar" class="lg:hidden text-gray-400 hover:text-white">
+                <button id="close-sidebar" class="lg:hidden text-gray-400 hover:text-white cursor-pointer">
                     <i class="fa-solid fa-xmark text-xl"></i>
                 </button>
             </div>
-            
-                    
             <nav class="px-4 py-6 space-y-1">
-                <a href="#" data-target="dashboard" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg transition">
+                <a href="#" data-target="dashboard" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg transition bg-slate-800 text-white">
                     <i class="fa-solid fa-chart-pie w-5"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#" data-target="users" id="nav-users-link" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg transition">
+                <a href="#" data-target="users" id="nav-users-link" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg transition text-gray-300 hover:bg-slate-800 hover:text-white">
                     <i class="fa-solid fa-users w-5"></i>
                     <span>User Management</span>
                 </a>
-                <a href="#" data-target="posts" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg transition">
+                <a href="#" data-target="posts" class="nav-item flex items-center space-x-3 px-4 py-3 rounded-lg transition text-gray-300 hover:bg-slate-800 hover:text-white">
                     <i class="fa-solid fa-file-pen w-5"></i>
                     <span>Post Control</span>
                 </a>
-                
-            
                 <hr class="border-slate-800 my-4">
-
-                
-                <a href="../index.html" class="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-slate-800 hover:text-white transition text-sm">
+                <a href="index.html" class="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-400 hover:bg-slate-800 hover:text-white transition text-sm">
                     <i class="fa-solid fa-arrow-up-right-from-square w-5 text-xs"></i>
                     <span>View Public Site</span>
                 </a>
-
-                
                 <button onclick="SecurityEngine.revokeSession()" class="w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-red-400 hover:bg-red-950/30 hover:text-red-300 transition mt-auto text-left cursor-pointer">
                     <i class="fa-solid fa-right-from-bracket w-5"></i>
                     <span>Terminate Session</span>
@@ -123,19 +103,14 @@
             </nav>
         </aside>
 
-
-        
         <div class="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
-            
-            
             <header class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 sticky top-0 z-40">
                 <div class="flex items-center space-x-4">
-                    <button id="open-sidebar" class="lg:hidden text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <button id="open-sidebar" class="lg:hidden text-gray-600 hover:text-gray-900 focus:outline-none cursor-pointer">
                         <i class="fa-solid fa-bars text-xl"></i>
                     </button>
                     <h1 id="page-title" class="text-xl font-semibold text-gray-800">Dashboard Overview</h1>
                 </div>
-                
                 <div class="flex items-center space-x-4">
                     <div class="flex items-center space-x-3 border-l pl-4 border-gray-200">
                         <img id="active-user-avatar" src="" alt="Admin Avatar" class="w-9 h-9 rounded-full object-cover ring-2 ring-gray-100">
@@ -145,10 +120,7 @@
                 </div>
             </header>
 
-            
             <main class="p-6 space-y-6 max-w-[1600px] w-full mx-auto">
-                
-                
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
                         <div>
@@ -159,17 +131,15 @@
                             <i class="fa-solid fa-users"></i>
                         </div>
                     </div>
-                    
                     <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
                         <div>
-                            <p class="text-sm font-medium text-gray-500 uppercase">Total Published Posts</p>
+                            <p class="text-sm font-medium text-gray-500 uppercase">Catalog Items</p>
                             <h3 id="stat-posts" class="text-2xl font-bold text-gray-900 mt-1">0</h3>
                         </div>
                         <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center text-xl">
                             <i class="fa-solid fa-newspaper"></i>
                         </div>
                     </div>
-
                     <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center justify-between">
                         <div>
                             <p class="text-sm font-medium text-gray-500 uppercase">Security Token</p>
@@ -183,8 +153,8 @@
                     </div>
                 </div>
 
-                
-                <div id="view-users" class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <!-- Users View Section -->
+                <div id="view-users" class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden hidden">
                     <div class="p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div>
                             <h2 class="text-lg font-bold text-gray-900">System Users</h2>
@@ -210,24 +180,25 @@
                     </div>
                 </div>
 
-                
+                <!-- Posts/Catalog View Section -->
                 <div id="view-posts" class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
                     <div class="p-6 border-b border-gray-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                         <div>
-                            <h2 class="text-lg font-bold text-gray-900">Post Management</h2>
-                            <p class="text-sm text-gray-500">Create, write, and update live publishing articles.</p>
+                            <h2 class="text-lg font-bold text-gray-900">Catalog & Post Control</h2>
+                            <p class="text-sm text-gray-500">Manage all website products, meals, cakes, and gifts.</p>
                         </div>
                         <button id="btn-add-post" class="inline-flex items-center justify-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2.5 rounded-lg transition text-sm cursor-pointer">
                             <i class="fa-solid fa-feather"></i>
-                            <span>Write New Post</span>
+                            <span>Add New Item</span>
                         </button>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left border-collapse">
                             <thead>
                                 <tr class="bg-gray-50 border-b border-gray-200 text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    <th class="px-6 py-4">Article Title</th>
+                                    <th class="px-6 py-4">Item Details</th>
                                     <th class="px-6 py-4">Category</th>
+                                    <th class="px-6 py-4">Price</th>
                                     <th class="px-6 py-4">Status</th>
                                     <th class="px-6 py-4">Date Added</th>
                                     <th class="px-6 py-4 text-right">Actions</th>
@@ -237,615 +208,459 @@
                         </table>
                     </div>
                 </div>
-
             </main>
         </div>
     </div>
 
-    <!-- GLOBAL UNIVERSAL MODAL -->
-  <!-- Global Modal Framework -->
-<!-- Global Modal Framework with Price & Image Upload Hooks -->
-<div id="global-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 overflow-hidden">
-        <div class="flex justify-between items-center border-b border-gray-100 pb-4 mb-4">
-            <h3 id="modal-title" class="text-lg font-bold text-gray-900">Configure Live Storefront Post</h3>
-            <button class="close-modal-trigger text-gray-400 hover:text-gray-600 transition">
-                <i class="fa-solid fa-xmark text-xl"></i>
-            </button>
-        </div>
-
-        <!-- Hidden placeholder user form to maintain system compatibility -->
-        <form id="form-user" class="hidden"></form>
-
-        <!-- Dynamic Post, Pricing & Asset Upload Form Structure -->
-        <form id="form-post" class="space-y-4" onsubmit="event.preventDefault();">
-            <input type="hidden" id="post-id">
-            
-            <div>
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Product Name / Post Title</label>
-                <input type="text" id="post-title" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900" placeholder="e.g., Luxury Chocolate Velvet">
+    <!-- Global Modal Framework -->
+    <div id="global-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl p-6 overflow-hidden">
+            <div class="flex justify-between items-center border-b border-gray-100 pb-4 mb-4">
+                <h3 id="modal-title" class="text-lg font-bold text-gray-900">Configure Live Storefront Post</h3>
+                <button class="close-modal-trigger text-gray-400 hover:text-gray-600 transition cursor-pointer">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
             </div>
-
-            <div class="grid grid-cols-2 gap-4">
+            <form id="form-user" class="hidden"></form>
+            <form id="form-post" class="space-y-4" onsubmit="event.preventDefault();">
+                <input type="hidden" id="post-id">
                 <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Target Section Feed</label>
-                    <select id="post-category" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white text-gray-900 focus:outline-none focus:border-emerald-500">
-                        <option value="Cakes">Cakes (New Collections)</option>
-                        <option value="Meal-Time">Meal-Time Section</option>
-                    </select>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Product Name / Title</label>
+                    <input type="text" id="post-title" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900 bg-white" placeholder="e.g., Luxury Chocolate Velvet">
                 </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Item Pricing (₦)</label>
-                    <input type="number" id="post-price" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900" placeholder="e.g., 15000">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Badge Tag</label>
-                    <input type="text" id="post-tag" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900" placeholder="e.g., Premium, Spicy, Classic">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Visibility Status</label>
-                    <select id="post-status" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white text-gray-900 focus:outline-none focus:border-emerald-500">
-                        <option value="Published">Published (Live On Feed)</option>
-                        <option value="Draft">Draft (Hidden to Public)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Image Asset Link or Filename</label>
-                <input type="text" id="post-img-src" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900" placeholder="e.g., choc3.jpg or https://...">
-            </div>
-        </form>
-
-        <div class="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-6">
-            <button class="close-modal-trigger px-4 py-2 text-sm font-semibold text-gray-500 hover:bg-gray-50 rounded-xl transition">Cancel</button>
-            <button id="btn-submit-modal" class="px-5 py-2 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-md transition">Save Changes</button>
-        </div>
-    </div>
-</div>
-
-
-        <!-- USER SPECIFIC FORM WORKFLOW -->
-        <form id="form-user" class="hidden space-y-4">
-            <!-- User fields can go here if needed later -->
-        </form>
-
-        <!-- POSTS & CATALOG SPECIFIC FORM WORKFLOW -->
-        <form id="form-post" class="hidden space-y-4" onsubmit="event.preventDefault();">
-            <input type="hidden" id="post-id">
-            
-            <div>
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Article or Item Title</label>
-                <input type="text" id="post-title" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900" placeholder="e.g., The Perfect Vanilla Base Architecture">
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Category Segment</label>
-                <input type="text" id="post-category" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900" placeholder="e.g., Engineering, Cakes, Meals">
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Publishing Visibility State</label>
-                <select id="post-status" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-emerald-500 text-gray-900">
-                    <option value="Published">Published (Live on Public Feed)</option>
-                    <option value="Draft">Draft (Restricted Control Access Only)</option>
-                </select>
-            </div>
-
-            <div>
-                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Body Content</label>
-                <textarea id="post-content" rows="4" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900 resize-none" placeholder="Write your full update details here..."></textarea>
-            </div>
-        </form>
-
-        <div class="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-6">
-            <button class="close-modal-trigger px-4 py-2 text-sm font-semibold text-gray-500 hover:bg-gray-50 rounded-xl transition">
-                Cancel
-            </button>
-            <button id="btn-submit-modal" class="px-5 py-2 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-md shadow-emerald-600/10 transition">
-                Save Changes
-            </button>
-        </div>
-    </div>
-</div>
-
-                    </div>
-                    
-                    <!-- USER FORM SLOTS -->
-                    <form id="form-user" class="space-y-4 mt-4 hidden">
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Full Name</label>
-                            <input type="text" id="user-name" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-white text-gray-900">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Email Address</label>
-                            <input type="email" id="user-email" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 bg-white text-gray-900">
-                        </div>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">System Role</label>
-                                <select id="user-role" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900">
-                                    <option value="Administrator">Administrator</option>
-                                    <option value="Editor">Editor</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Status</label>
-                                <select id="user-status" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900">
-                                    <option value="Active">Active</option>
-                                    <option value="Suspended">Suspended</option>
-                                </select>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- POST FORM SLOTS -->
-                                       <!-- POST FORM SLOTS -->
-                    <form id="form-post" class="space-y-4 mt-4 hidden">
-                        <input type="hidden" id="post-id">
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Post Title</label>
-                            <input type="text" id="post-title" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-500 bg-white text-gray-900">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Category</label>
-                            <input type="text" id="post-category" placeholder="e.g., Technology, Engineering" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-500 bg-white text-gray-900">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Publish Status</label>
-                            <select id="post-status" class="w-full px-3 py-2 border border-gray-300 rounded-lg bg-white text-gray-900">
-                                <option value="Published">Published</option>
-                                <option value="Draft">Draft</optio </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-gray-600 uppercase mb-1">Body Text Content</label>
-                            <textarea id="post-content" rows="4" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-emerald-500 text-sm bg-white text-gray-900"></textarea>
-                        </div>
-                    </form>
-
-                    <!-- MODAL FOOTER TRANSACTIONS -->
-                    <div class="pt-4 flex justify-end space-x-2 border-t border-gray-100 mt-4">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-<script>
-const SecurityEngine = {
-    sessionTimeoutSeconds: 9000, 
-    timerIntervalId: null,
-    selectedProfileKey: null,
-
-    profiles: {
-        admin: {
-            name: "Cynthia Nguhemen",
-            role: "Administrator",
-            password: "admin123",
-            avatar: "https://i.ibb.co/RTGCdJC7/FB-IMG-17790095436833360.jpg"
-        },
-        editor: {
-            name: "Tall Dorcas",
-            role: "Editor",
-            password: "editor123",
-            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
-        }
-    },
-
-    selectProfile(profileKey) {
-        this.selectedProfileKey = profileKey;
-        const target = this.profiles[profileKey];
-        document.getElementById('auth-target-name').textContent = target.name;
-        document.getElementById('auth-target-role').textContent = `System Privilege Level: ${target.role}`;
-        document.getElementById('auth-target-avatar').src = target.avatar;
-        document.getElementById('auth-error-msg').classList.add('hidden');
-        document.getElementById('auth-password-input').value = '';
-        document.getElementById('auth-step-identity').classList.add('hidden');
-        document.getElementById('auth-step-password').classList.remove('hidden');
-        document.getElementById('auth-password-input').focus();
-    },
-
-    handlePasswordSubmit(event) {
-        event.preventDefault();
-        const enteredPassword = document.getElementById('auth-password-input').value;
-        const target = this.profiles[this.selectedProfileKey];
-        const errorDisplay = document.getElementById('auth-error-msg');
-
-        if (enteredPassword === target.password) {
-            const payload = {
-                authenticated: true,
-                role: target.role,
-                identity: target.name,
-                avatar: target.avatar,
-                tokenExpiration: Date.now() + (this.sessionTimeoutSeconds * 1000)
-            };
-            sessionStorage.setItem('sys_auth_token', JSON.stringify(payload));
-            document.getElementById('auth-gate').classList.add('hidden');
-            document.getElementById('app-wrapper').classList.remove('hidden');
-            this.startSessionTimer();
-            this.resetAuthWorkflow();
-            renderApp();
-        } else {
-            errorDisplay.textContent = "Security clearance rejected: Invalid verification key signature.";
-            errorDisplay.classList.remove('hidden');
-            document.getElementById('auth-password-input').select();
-        }
-    },
-
-    resetAuthWorkflow() {
-        this.selectedProfileKey = null;
-        document.getElementById('auth-step-password').classList.add('hidden');
-        document.getElementById('auth-step-identity').classList.remove('hidden');
-    },
-
-    verifyAccessContext() {
-        const activeToken = sessionStorage.getItem('sys_auth_token');
-        if (!activeToken) return false;
-        try {
-            const data = JSON.parse(activeToken);
-            if (Date.now() > data.tokenExpiration) {
-                this.revokeSession();
-                alert('Session expired. Please re-authenticate.');
-                return false;
-            }
-            return data;
-        } catch (e) {
-            this.revokeSession();
-            return false;
-        }
-    },
-
-    hasPermission(requiredRole) {
-        const user = this.verifyAccessContext();
-        if (!user) return false;
-        if (user.role === 'Administrator') return true;
-        return user.role === requiredRole;
-    },
-
-    startSessionTimer() {
-        if (this.timerIntervalId) clearInterval(this.timerIntervalId);
-        const display = document.getElementById('session-timer');
-        this.timerIntervalId = setInterval(() => {
-            const user = JSON.parse(sessionStorage.getItem('sys_auth_token'));
-            if (!user) return clearInterval(this.timerIntervalId);
-            const remainingMs = user.tokenExpiration - Date.now();
-            if (remainingMs <= 0) {
-                clearInterval(this.timerIntervalId);
-                SecurityEngine.revokeSession();
-                alert('Session expired.');
-            } else if (display) {
-                const secs = Math.ceil(remainingMs / 1000);
-                const mins = Math.floor(secs / 60);
-                const displaySecs = secs % 60;
-                display.innerHTML = `<span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span> ${mins}:${displaySecs < 10 ? '0' : ''}${displaySecs}`;
-            }
-        }, 1000);
-    },
-
-    revokeSession() {
-        if (this.timerIntervalId) clearInterval(this.timerIntervalId);
-        sessionStorage.removeItem('sys_auth_token');
-        const appWrapper = document.getElementById('app-wrapper');
-        const authGate = document.getElementById('auth-gate');
-        if (appWrapper) appWrapper.classList.add('hidden');
-        if (authGate) authGate.classList.remove('hidden');
-        this.resetAuthWorkflow();
-    }
-};
-
-
-const baseInventory = [
-    { id: 'c1', name: "Double Chocolate", category: "Cakes", tag: "Luxury", price: 24000, img: "choc3.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c2', name: "Classic Vanilla", category: "Cakes", tag: "Seasonal", price: 21000, img: "val.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c3', name: "Strawberry Red", category: "Cakes", tag: "Popular", price: 12000, img: "straw.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c4', name: "Royal Fruit", category: "Cakes", tag: "Luxury", price: 15000, img: "fruit.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c5', name: "Red Velvet", category: "Cakes", tag: "Premium", price: 18000, img: "red.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c6', name: "Oreo Crunch", category: "Cakes", tag: "Modern", price: 22000, img: "oreo.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c7', name: "Caramel Drip", category: "Cakes", tag: "Luxury", price: 26000, img: "caramel.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c8', name: "White Forest", category: "Cakes", tag: "Classic", price: 19000, img: "white.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c9', name: "Lemon Zest", category: "Cakes", tag: "Fresh", price: 16000, img: "lemon.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c10', name: "Coconut Cream", category: "Cakes", tag: "Tropical", price: 17500, img: "coco.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'c11', name: "Pink Marble", category: "Cakes", tag: "Artisan", price: 23000, img: "marble.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm1', name: "Amala & Ewedu", category: "Meal-Time", tag: "Traditional", price: 5000, img: "meal1.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm2', name: "Party Jollof", category: "Meal-Time", tag: "Classic", price: 4500, img: "meal2.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm3', name: "Fried Rice Combo", category: "Meal-Time", tag: "Premium", price: 5500, img: "meal3.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm4', name: "Pounded Yam", category: "Meal-Time", tag: "Traditional", price: 6000, img: "meal4.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm5', name: "Creamy Pasta", category: "Meal-Time", tag: "Italian", price: 7000, img: "meal5.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm6', name: "Grilled Fish", category: "Meal-Time", tag: "Protein", price: 8500, img: "meal6.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm7', name: "Spicy Wings", category: "Meal-Time", tag: "Sides", price: 4000, img: "meal7.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm8', name: "Fruit Bowl", category: "Meal-Time", tag: "Healthy", price: 3500, img: "meal8.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm9', name: "Catfish Soup", category: "Meal-Time", tag: "Traditional", price: 5500, img: "meal9.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm10', name: "Rice & Beans", category: "Meal-Time", tag: "Classic", price: 4000, img: "meal10.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm11', name: "Yam Porridge", category: "Meal-Time", tag: "Traditional", price: 4500, img: "meal11.jpg", status: "Published", date: "2026-05-16" },
-    { id: 'm12', name: "Gizz-Dodo", category: "Meal-Time", tag: "Signature", price: 5000, img: "meal12.jpg", status: "Published", date: "2026-05-16" },
-     { id: 'p1', name: "Classic Red Roses", category: "Packages", tag: "Romantic", price: 15000, img: "rose1.jpg", status: "Published", date: "2027-05-19" },
-    { id: 'p2', name: "Money Bouquets", category: "Packages", tag: "Elegant", price: 18500, img: "money.jpg", status: "Published", date: "2026-05-19" },
-    { id: 'p3', name: "The Birthday Bundle", category: "Packages", tag: "Bundle", price: 45000, img: "gift1.jpg", status: "Published", date: "2027-05-19" },
-    { id: 'p4', name: "flower Bouquet", category: "Packages", tag: "Seasonal", price: 12000, img: "fbouquet.jpg", status: "Published", date:"2026-05-19" },
-    { id: 'p5', name: "Luxury Gift Basket", category: "Packages", tag: "Fresh", price: 25000, img: "basket.jpg", status: "Published", date:"2026-05-19" },
-    { id: 'p6', name: "Wine & Chocolate Box", category: "Packages", tag: "Luxury", price: 35000, img: "wine-choc.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'p7', name: "Mixed Gerberas", category: "Packages", tag: "Vibrant", price: 14000, img: "gerb.jpg", status: "Published" ,date:"2026-06-19"},
-    { id: 'p8', name: "Orchid Elegance", category: "Packages", tag: "Premium", price: 22000, img: "orchid.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'p9', name: "Pamper Hamper", category: "Packages", tag: "Self-Care", price: 40000, img: "pamper.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'p10', name: "Eternal Bloom (Dried)", category: "Packages", tag: "Lasting", price: 28000, img: "dried.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'p11', name: "Baby Welcome Kit", category: "Packages", tag: "Newborn", price: 32000, img: "baby.jpg", status: "Published" ,date:"2026-05-19"},
-    { id: 'p12', name: "Tulip Fantasy", category: "Packages", tag: "Imported", price: 30000, img: "tulip.jpg", status: "Published",date:"2026-05-19" },
-        { id: 'cel1', name: "Birthday", category: "Celebrations", tag: "Luxury", price: 145000, img: "birthday.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel2', name: "Anniversary", category: "Celebrations", tag: "Elegant", price: 180000, img: "anniversary.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel3', name: "Emerald Cube", category: "Celebrations", tag: "Modern", price: 160000, img: "emerald.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel4', name: "Graduation", category: "Celebrations", tag: "Couture", price: 155000, img: "graduationp.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel5', name: "Wedding", category: "Celebrations", tag: "Classic", price: 195000, img: "wedding.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel6', name: "Obsidian Glass", category: "Celebrations", tag: "Artistic", price: 210000, img: "obsidian.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel7', name: "Botanical Gilt", category: "Celebrations", tag: "Floral", price: 150000, img: "botanical.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel8', name: "Brutalist Stone", category: "Celebrations", tag: "Minimal", price: 140000, img: "concrete.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel9', name: "Opal Shimmer", category: "Celebrations", tag: "Lustre", price: 175000, img: "opal.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel10', name: "Mosaic Tile", category: "Celebrations", tag: "Bespoke", price: 165000, img: "mosaic.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel11', name: "Sapphire Fissure", category: "Celebrations", tag: "Masterpiece", price: 225000, img: "sapphire.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'cel12', name: "Venetian Velvet", category: "Celebrations", tag: "Vintage", price: 185000, img: "venetian.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd1', name: "Artisan Baguette", category: "-Deli", tag: "Fresh", price: 3500, img: "deli1.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd2', name: "Smoked Turkey Sub", category: "Daily-Deli", tag: "Classic", price: 8500, img: "deli2.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd3', name: "Greek Salad Bowl", category: "Daily-Deli", tag: "Healthy", price: 6000, img: "deli3.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd4', name: "Pastrami Melt", category: "Daily-Deli", tag: "Signature", price: 9500, img: "deli4.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd5', name: "Egg Salad Pot", category: "Daily-Deli", tag: "Protein", price: 4500, img: "deli5.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd6', name: "Cold Brew Coffee", category: "Daily-Deli", tag: "Chilled", price: 3000, img: "deli6.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd7', name: "Club Sandwich", category: "Daily-Deli", tag: "Popular", price: 7500, img: "deli7.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd8', name: "Hummus & Pita", category: "Daily-Deli", tag: "Vegan", price: 5000, img: "deli8.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd9', name: "Fruit Parfait", category: "Daily-Deli", tag: "Fresh", price: 4000, img: "deli9.jpg", status: "Published" },
-    { id: 'd10', name: "Beef Bresaola", category: "Daily-Deli", tag: "Luxury", price: 12000, img: "deli10.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd11', name: "Assorted Olives", category: "Daily-Deli", tag: "Artisan", price: 3500, img: "deli11.jpg", status: "Published",date:"2026-05-19" },
-    { id: 'd12', name: "Cheese Selection", category: "Daily-Deli", tag: "Premium", price: 15000, img: "deli12.jpg", status: "Published",date:"2026-05-19" }
-
-
-];
-
-let state = {
-    users: [
-        { id: 1, name: "Cynthia Nguhemen", email: "nguhemen001@gmail.com", role: "Administrator", status: "Active" },
-        { id: 2, name: "Tall Dorcas", email: "dorcasdoochian@gmail.com", role: "Editor", status: "Active" }
-    ],
-    products: JSON.parse(localStorage.getItem('shared_products')) || baseInventory,
-    currentView: 'posts', 
-    modalContext: { type: null, mode: null, targetId: null }
-};
-
-const elements = {
-    sidebar: document.getElementById('sidebar'),
-    openSidebarBtn: document.getElementById('open-sidebar'),
-    closeSidebarBtn: document.getElementById('close-sidebar'),
-    pageTitle: document.getElementById('page-title'),
-    navItems: document.querySelectorAll('.nav-item'),
-    viewUsersSection: document.getElementById('view-users'),
-    viewPostsSection: document.getElementById('view-posts'),
-    statUsers: document.getElementById('stat-users'),
-    statPosts: document.getElementById('stat-posts'),
-    userTableBody: document.getElementById('user-table-body'),
-    postTableBody: document.getElementById('post-table-body'),
-    modal: document.getElementById('global-modal'),
-    modalTitle: document.getElementById('modal-title'),
-    modalSubmitBtn: document.getElementById('btn-submit-modal'),
-    closeModalTriggers: document.querySelectorAll('.close-modal-trigger'),
-    userForm: document.getElementById('form-user'),
-    postForm: document.getElementById('form-post'),
-    addUserBtn: document.getElementById('btn-add-user'),
-    addPostBtn: document.getElementById('btn-add-post')
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    if (!localStorage.getItem('shared_products') || JSON.parse(localStorage.getItem('shared_products')).length < 15) {
-        localStorage.setItem('shared_products', JSON.stringify(baseInventory));
-        state.products = baseInventory;
-    }
-    initEvents();
-    
-    const activeSession = SecurityEngine.verifyAccessContext();
-    if (activeSession) {
-        document.getElementById('auth-gate').classList.add('hidden');
-        document.getElementById('app-wrapper').classList.remove('hidden');
-        SecurityEngine.startSessionTimer();
-        renderApp();
-    } else {
-        SecurityEngine.revokeSession();
-    }
-});
-
-function initEvents() {
-    if (elements.openSidebarBtn) elements.openSidebarBtn.addEventListener('click', () => elements.sidebar.classList.remove('-translate-x-full'));
-    if (elements.closeSidebarBtn) elements.closeSidebarBtn.addEventListener('click', () => elements.sidebar.classList.add('-translate-x-full'));
-
-    elements.navItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            const target = item.getAttribute('data-target');
-            if (target === 'users' && !SecurityEngine.hasPermission('Administrator')) {
-                alert('Access Denied: Administrator clearance required.');
-                return;
-            }
-            if (target) {
-                state.currentView = target;
-                renderApp();
-            }
-        });
-    });
-
-    elements.closeModalTriggers.forEach(trigger => trigger.addEventListener('click', closeModal));
-    if (elements.addUserBtn) elements.addUserBtn.addEventListener('click', () => openModal('user', 'create'));
-    if (elements.addPostBtn) elements.addPostBtn.addEventListener('click', () => openModal('post', 'create'));
-    if (elements.modalSubmitBtn) elements.modalSubmitBtn.addEventListener('click', handleModalSubmit);
-}
-
-function renderApp() {
-    const activeUser = SecurityEngine.verifyAccessContext();
-    if (!activeUser) return;
-
-    document.getElementById('active-user-name').textContent = activeUser.identity;
-    document.getElementById('active-user-badge').textContent = activeUser.role;
-    document.getElementById('active-user-avatar').src = activeUser.avatar;
-
-    if (elements.statUsers) elements.statUsers.textContent = state.users.length;
-    if (elements.statPosts) elements.statPosts.textContent = state.products.length;
-
-    if (state.currentView === 'dashboard' || state.currentView === 'posts') {
-        elements.pageTitle.textContent = "Live Feed Content & Product Cards";
-        elements.viewUsersSection.classList.add('hidden');
-        elements.viewPostsSection.classList.remove('hidden');
-    } else if (state.currentView === 'users') {
-        elements.pageTitle.textContent = "User Directory Management";
-        elements.viewUsersSection.classList.remove('hidden');
-        elements.viewPostsSection.classList.add('hidden');
-    }
-
-    renderUsersTable();
-    renderPostsTable();
-}
-
-function renderUsersTable() {
-    if (!elements.userTableBody) return;
-    elements.userTableBody.innerHTML = '';
-    state.users.forEach(user => {
-        const tr = document.createElement('tr');
-        tr.className = "border-b border-gray-100 hover:bg-gray-50 text-sm";
-        tr.innerHTML = `
-            <td class="px-6 py-4"><strong>${user.name}</strong><br><span class="text-xs text-gray-400">${user.email}</span></td>
-            <td class="px-6 py-4">${user.role}</td>
-            <td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full text-xs bg-green-100 text-green-800">${user.status}</span></td>
-            <td class="px-6 py-4 text-right">—</td>
-        `;
-        elements.userTableBody.appendChild(tr);
-    });
-}
-
-function renderPostsTable() {
-    if (!elements.postTableBody) return;
-    elements.postTableBody.innerHTML = '';
-    
-    state.products.forEach(post => {
-        const tr = document.createElement('tr');
-        tr.className = "border-b border-gray-100 hover:bg-amber-50/40 text-sm";
-        tr.innerHTML = `
-            <td class="px-6 py-4 font-semibold text-gray-900">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-gray-100 overflow-hidden flex-shrink-0 border border-gray-200/60">
-                        <img src="${post.img || 'meal1.jpg'}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100?text=Food'">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Category</label>
+                        <select id="post-category" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white text-gray-900 focus:outline-none focus:border-emerald-500">
+                            <option value="New Collections">New Collections</option>
+                            <option value="Meal-Time">Meal-Time</option>
+                            <option value="Gifts">Gifts & Packages</option>
+                        </select>
                     </div>
                     <div>
-                        ${post.name}
-                        <br><span class="text-[10px] font-mono text-gray-400 font-normal">ID ref: ${post.id}</span>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Pricing (₦)</label>
+                        <input type="number" id="post-price" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900 bg-white" placeholder="e.g., 15000">
                     </div>
                 </div>
-            </td>
-            <td class="px-6 py-4"><span class="px-2 py-1 bg-amber-100 text-amber-800 rounded text-xs font-medium">${post.category}</span></td>
-            <td class="px-6 py-4 font-bold text-emerald-700">₦${parseFloat(post.price).toLocaleString()}</td>
-            <td class="px-6 py-4"><span class="px-2 py-0.5 rounded text-xs ${post.status === 'Published' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600'}">${post.status || 'Published'}</span></td>
-            <td class="px-6 py-4 text-gray-500 text-xs">${post.date || '---'}</td>
-            <td class="px-6 py-4 text-right">
-                <button onclick="openModal('post', 'edit', '${post.id}')" class="text-emerald-600 hover:underline font-bold text-xs"><i class="fa-solid fa-pen-to-square"></i> Modify Card</button>
-                <button onclick="deletePost('${post.id}')" class="text-red-500 hover:underline font-bold text-xs ml-3"><i class="fa-solid fa-trash"></i> Drop</button>
-            </td>
-        `;
-        elements.postTableBody.appendChild(tr);
-    });
-}
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Badge Tag</label>
+                        <input type="text" id="post-tag" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900 bg-white" placeholder="e.g., Best Seller, Luxury">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Status</label>
+                        <select id="post-status" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white text-gray-900 focus:outline-none focus:border-emerald-500">
+                            <option value="Published">Published</option>
+                            <option value="Draft">Draft</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Image Filename / URL</label>
+                    <input type="text" id="post-img-src" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-500 text-gray-900 bg-white" placeholder="e.g., coconut cream.jpg">
+                </div>
+            </form>
+            <div class="flex justify-end gap-3 pt-4 border-t border-gray-100 mt-6">
+                <button class="close-modal-trigger px-4 py-2 text-sm font-semibold text-gray-500 hover:bg-gray-50 rounded-xl transition cursor-pointer">Cancel</button>
+                <button id="btn-submit-modal" class="px-5 py-2 text-sm font-semibold bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl shadow-md transition cursor-pointer">Save Changes</button>
+            </div>
+        </div>
+    </div>
 
-window.openModal = function(type, mode, id = null) {
-    state.modalContext = { type, mode, targetId: id };
-    elements.userForm.classList.add('hidden');
-    elements.postForm.classList.remove('hidden');
-    elements.modalTitle.textContent = mode === 'create' ? "Post New Live Catalog Item" : "Modify Post Data & Pricing";
+    <!-- Script Block -->
+    <script>
+        const SecurityEngine = {
+            sessionTimeoutSeconds: 9000, 
+            timerIntervalId: null,
+            selectedProfileKey: null,
 
-    if (mode === 'edit') {
-        const post = state.products.find(p => p.id === id);
-        if(post) {
-            document.getElementById('post-id').value = post.id;
-            document.getElementById('post-title').value = post.name;
-            document.getElementById('post-category').value = post.category;
-            document.getElementById('post-status').value = post.status || "Published";
-            if(document.getElementById('post-price')) document.getElementById('post-price').value = post.price;
-            if(document.getElementById('post-img-src')) document.getElementById('post-img-src').value = post.img || "";
-            if(document.getElementById('post-tag')) document.getElementById('post-tag').value = post.tag || "Fresh";
-        }
-    } else {
-        elements.postForm.reset();
-        document.getElementById('post-id').value = '';
-    }
-    elements.modal.classList.remove('hidden');
-}
+            profiles: {
+                admin: {
+                    name: "Cynthia Nguhemen",
+                    role: "Administrator",
+                    password: "admin123",
+                    avatar: "https://i.ibb.co/RTGCdJC7/FB-IMG-17790095436833360.jpg"
+                },
+                editor: {
+                    name: "Tall Dorcas",
+                    role: "Editor",
+                    password: "editor123",
+                    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
+                }
+            },
 
-function closeModal() {
-    elements.modal.classList.add('hidden');
-}
+            selectProfile(profileKey) {
+                this.selectedProfileKey = profileKey;
+                const target = this.profiles[profileKey];
+                document.getElementById('auth-target-name').textContent = target.name;
+                document.getElementById('auth-target-role').textContent = `System Profile: ${target.role}`;
+                document.getElementById('auth-target-avatar').src = target.avatar;
+                
+                document.getElementById('auth-step-identity').classList.add('hidden');
+                document.getElementById('auth-step-password').classList.remove('hidden');
+                document.getElementById('auth-password-input').focus();
+            },
 
-function handleModalSubmit() {
-    const context = state.modalContext;
-    const name = document.getElementById('post-title').value.trim();
-    const category = document.getElementById('post-category').value;
-    const status = document.getElementById('post-status').value;
-    const price = parseFloat(document.getElementById('post-price').value) || 0;
-    const img = document.getElementById('post-img-src').value.trim() || 'meal1.jpg';
-    const tag = document.getElementById('post-tag').value.trim() || 'Fresh';
+            resetAuthWorkflow() {
+                this.selectedProfileKey = null;
+                document.getElementById('auth-step-password').classList.add('hidden');
+                document.getElementById('auth-step-identity').classList.remove('hidden');
+                document.getElementById('auth-password-input').value = '';
+                document.getElementById('auth-error-msg').classList.add('hidden');
+            },
 
-    if (!name) return alert('Please enter an item name/title.');
+            handlePasswordSubmit(e) {
+                e.preventDefault();
+                const pwd = document.getElementById('auth-password-input').value;
+                const target = this.profiles[this.selectedProfileKey];
 
-    if (context.mode === 'create') {
-        state.products.push({
-            id: 'p' + Date.now(),
-            name,
-            category,
-            tag,
-            price,
-            img,
-            status,
-            date: new Date().toISOString().split('T')[0]
+                if (pwd === target.password) {
+                    this.isAuthenticated = true;
+                    localStorage.setItem('cyndy_admin_auth', JSON.stringify({ profile: this.selectedProfileKey, timestamp: Date.now() }));
+                    this.grantAccess(target);
+                } else {
+                    const err = document.getElementById('auth-error-msg');
+                    err.textContent = "Incorrect password credentials.";
+                    err.classList.remove('hidden');
+                }
+            },
+
+            grantAccess(user) {
+                document.getElementById('auth-gate').classList.add('hidden');
+                document.getElementById('app-wrapper').classList.remove('hidden');
+                document.getElementById('active-user-name').textContent = user.name;
+                document.getElementById('active-user-badge').textContent = user.role;
+                document.getElementById('active-user-avatar').src = user.avatar;
+                
+                if (this.selectedProfileKey === 'editor') {
+                    const userTabLink = document.querySelector('[data-target="users"]');
+                    if (userTabLink) userTabLink.style.display = 'none';
+                    const addUserBtn = document.getElementById('btn-add-user');
+                    if (addUserBtn) addUserBtn.disabled = true;
+                }
+
+                initDashboardState();
+                this.startSessionTimer();
+            },
+
+            revokeSession() {
+                localStorage.removeItem('cyndy_admin_auth');
+                location.reload();
+            },
+
+            startSessionTimer() {
+                let timeLeft = this.sessionTimeoutSeconds;
+                const timerEl = document.getElementById('session-timer');
+                
+                this.timerIntervalId = setInterval(() => {
+                    timeLeft--;
+                    let mins = Math.floor(timeLeft / 60);
+                    let secs = timeLeft % 60;
+                    timerEl.innerHTML = `<span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span> ${mins}:${secs < 10 ? '0' : ''}${secs}`;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(this.timerIntervalId);
+                        alert('Session expired due to timeout.');
+                        this.revokeSession();
+                    }
+                }, 1000);
+            }
+        };
+
+      // Complete synchronized catalog containing all main storefront products
+const defaultPosts = [
+    { id: 'c1', title: 'Double Chocolate', category: 'Cakes', price: 24000, tag: 'Luxury', status: 'Published', date: '2026-02-18', image: 'choc3.jpg' },
+    { id: 'c2', title: 'Classic Vanilla', category: 'Cakes', price: 21000, tag: 'Seasonal', status: 'Published', date: '2026-02-18', image: 'val.jpg' },
+    { id: 'c3', title: 'Strawberry Red', category: 'Cakes', price: 12000, tag: 'Popular', status: 'Published', date: '2026-02-18', image: 'straw.jpg' },
+    { id: 'c4', title: 'Royal Fruit', category: 'Cakes', price: 15000, tag: 'Luxury', status: 'Published', date: '2026-02-18', image: 'fruit.jpg' },
+    { id: 'c5', title: 'Red Velvet', category: 'Cakes', price: 18000, tag: 'Premium', status: 'Published', date: '2026-02-18', image: 'red.jpg' },
+    { id: 'c6', title: 'Oreo Crunch', category: 'Cakes', price: 22000, tag: 'Modern', status: 'Published', date: '2026-02-18', image: 'oreo.jpg' },
+    { id: 'c7', title: 'Caramel Drip', category: 'Cakes', price: 26000, tag: 'Luxury', status: 'Published', date: '2026-02-18', image: 'caramel.jpg' },
+    { id: 'c8', title: 'Cheese cake', category: 'Cakes', price: 19000, tag: 'Classic', status: 'Published', date: '2026-02-18', image: 'white.jpg' },
+    { id: 'c9', title: 'Lemon Zest', category: 'Cakes', price: 16000, tag: 'Fresh', status: 'Published', date: '2026-02-18', image: 'lemon.jpg' },
+    { id: 'c10', title: 'Coconut Cream', category: 'Cakes', price: 17500, tag: 'Tropical', status: 'Published', date: '2026-02-18', image: 'coco.jpg' },
+    { id: 'c11', title: 'Pink Marble', category: 'Cakes', price: 23000, tag: 'Artisan', status: 'Published', date: '2026-02-18', image: 'marble.jpg' },
+    
+    { id: 'm1', title: 'Amala & Ewedu', category: 'Meal-Time', price: 5000, tag: 'Traditional', status: 'Published', date: '2026-02-18', image: 'meal1.jpg' },
+    { id: 'm2', title: 'Party Jollof', category: 'Meal-Time', price: 4500, tag: 'Classic', status: 'Published', date: '2026-02-18', image: 'meal2.jpg' },
+    { id: 'm3', title: 'Fried Rice Combo', category: 'Meal-Time', price: 5500, tag: 'Premium', status: 'Published', date: '2026-02-18', image: 'meal3.jpg' },
+    { id: 'm4', title: 'Pounded Yam', category: 'Meal-Time', price: 6000, tag: 'Traditional', status: 'Published', date: '2026-02-18', image: 'meal4.jpg' },
+    { id: 'm5', title: 'Creamy Pasta', category: 'Meal-Time', price: 7000, tag: 'Italian', status: 'Published', date: '2026-02-18', image: 'meal5.jpg' },
+    { id: 'm6', title: 'Grilled Fish', category: 'Meal-Time', price: 8500, tag: 'Protein', status: 'Published', date: '2026-02-18', image: 'meal6.jpg' },
+    { id: 'm7', title: 'Spicy Wings', category: 'Meal-Time', price: 4000, tag: 'Sides', status: 'Published', date: '2026-02-18', image: 'meal7.jpg' },
+    { id: 'm8', title: 'Fruit Bowl', category: 'Meal-Time', price: 3500, tag: 'Healthy', status: 'Published', date: '2026-02-18', image: 'meal8.jpg' },
+    { id: 'm9', title: 'Catfish Soup', category: 'Meal-Time', price: 5500, tag: 'Traditional', status: 'Published', date: '2026-02-18', image: 'meal9.jpg' },
+    { id: 'm10', title: 'Rice & Beans', category: 'Meal-Time', price: 4000, tag: 'Classic', status: 'Published', date: '2026-02-18', image: 'meal10.jpg' },
+    { id: 'm11', title: 'Yam Porridge', category: 'Meal-Time', price: 4500, tag: 'Traditional', status: 'Published', date: '2026-02-18', image: 'meal11.jpg' },
+    { id: 'm12', title: 'Gizz-Dodo', category: 'Meal-Time', price: 5000, tag: 'Signature', status: 'Published', date: '2026-02-18', image: 'meal12.jpg' },
+    
+    { id: 'p1', title: 'Classic Red Roses', category: 'Packages', price: 15000, tag: 'Romantic', status: 'Published', date: '2026-02-18', image: 'rose1.jpg' },
+    { id: 'p2', title: 'Money Bouquets', category: 'Packages', price: 18500, tag: 'Elegant', status: 'Published', date: '2026-02-18', image: 'money.jpg' },
+    { id: 'p3', title: 'The Birthday Bundle', category: 'Packages', price: 45000, tag: 'Bundle', status: 'Published', date: '2026-02-18', image: 'gift1.jpg' },
+    { id: 'p4', title: 'flower Bouquet', category: 'Packages', price: 12000, tag: 'Seasonal', status: 'Published', date: '2026-02-18', image: 'fbouquet.jpg' },
+    { id: 'p5', title: 'Luxury Gift Basket', category: 'Packages', price: 25000, tag: 'Fresh', status: 'Published', date: '2026-02-18', image: 'basket.jpg' },
+    { id: 'p6', title: 'Wine & Chocolate Box', category: 'Packages', price: 35000, tag: 'Luxury', status: 'Published', date: '2026-02-18', image: 'wine-choc.jpg' },
+    { id: 'p7', title: 'Mixed Gerberas', category: 'Packages', price: 14000, tag: 'Vibrant', status: 'Published', date: '2026-02-18', image: 'gerb.jpg' },
+    { id: 'p8', title: 'Orchid Elegance', category: 'Packages', price: 22000, tag: 'Premium', status: 'Published', date: '2026-02-18', image: 'orchid.jpg' },
+    { id: 'p9', title: 'Pamper Hamper', category: 'Packages', price: 40000, tag: 'Self-Care', status: 'Published', date: '2026-02-18', image: 'pamper.jpg' },
+    { id: 'p10', title: 'Eternal Bloom (Dried)', category: 'Packages', price: 28000, tag: 'Lasting', status: 'Published', date: '2026-02-18', image: 'dried.jpg' },
+    { id: 'p11', title: 'Baby Welcome Kit', category: 'Packages', price: 32000, tag: 'Newborn', status: 'Published', date: '2026-02-18', image: 'baby.jpg' },
+    { id: 'p12', title: 'Tulip Fantasy', category: 'Packages', price: 30000, tag: 'Imported', status: 'Published', date: '2026-02-18', image: 'tulip.jpg' },
+    
+    { id: 'cel1', title: 'Birthday', category: 'Celebrations', price: 145000, tag: 'Luxury', status: 'Published', date: '2026-02-18', image: 'birthday.jpg' },
+    { id: 'cel2', title: 'Annivesary', category: 'Celebrations', price: 180000, tag: 'Elegant', status: 'Published', date: '2026-02-18', image: 'anniversary.jpg' },
+    { id: 'cel3', title: 'Emerald Cube', category: 'Celebrations', price: 160000, tag: 'Modern', status: 'Published', date: '2026-02-18', image: 'emerald.jpg' },
+    { id: 'cel4', title: 'Graduation', category: 'Celebrations', price: 155000, tag: 'Couture', status: 'Published', date: '2026-02-18', image: 'graduation.jpg' },
+    { id: 'cel5', title: 'Wedding', category: 'Celebrations', price: 195000, tag: 'Classic', status: 'Published', date: '2026-02-18', image: 'wedding.jpg' },
+    { id: 'cel6', title: 'Obsidian Glass', category: 'Celebrations', price: 210000, tag: 'Artistic', status: 'Published', date: '2026-02-18', image: 'obsidian.jpg' },
+    { id: 'cel7', title: 'Botanical Gilt', category: 'Celebrations', price: 150000, tag: 'Floral', status: 'Published', date: '2026-02-18', image: 'botanical.jpg' },
+    { id: 'cel8', title: 'Brutalist Stone', category: 'Celebrations', price: 140000, tag: 'Minimal', status: 'Published', date: '2026-02-18', image: 'concrete.jpg' },
+    { id: 'cel9', title: 'Opal Shimmer', category: 'Celebrations', price: 175000, tag: 'Lustre', status: 'Published', date: '2026-02-18', image: 'opal.jpg' },
+    { id: 'cel10', title: 'Mosaic Tile', category: 'Celebrations', price: 165000, tag: 'Bespoke', status: 'Published', date: '2026-02-18', image: 'mosaic.jpg' },
+    { id: 'cel11', title: 'Sapphire Fissure', category: 'Celebrations', price: 225000, tag: 'Masterpiece', status: 'Published', date: '2026-02-18', image: 'sapphire.jpg' },
+    { id: 'cel12', title: 'Venetian Velvet', category: 'Celebrations', price: 185000, tag: 'Vintage', status: 'Published', date: '2026-02-18', image: 'venetian.jpg' },
+    
+    { id: 'd1', title: 'Artisan Baguette', category: 'Daily-Deli', price: 3500, tag: 'Fresh', status: 'Published', date: '2026-02-18', image: 'deli1.jpg' },
+    { id: 'd2', title: 'Smoked Turkey Sub', category: 'Daily-Deli', price: 8500, tag: 'Classic', status: 'Published', date: '2026-02-18', image: 'deli2.jpg' },
+    { id: 'd3', title: 'Greek Salad Bowl', category: 'Daily-Deli', price: 6000, tag: 'Healthy', status: 'Published', date: '2026-02-18', image: 'deli3.jpg' },
+    { id: 'd4', title: 'Pastrami Melt', category: 'Daily-Deli', price: 9500, tag: 'Signature', status: 'Published', date: '2026-02-18', image: 'deli4.jpg' },
+    { id: 'd5', title: 'Egg Salad Pot', category: 'Daily-Deli', price: 4500, tag: 'Protein', status: 'Published', date: '2026-02-18', image: 'deli5.jpg' },
+    { id: 'd6', title: 'Cold Brew Coffee', category: 'Daily-Deli', price: 3000, tag: 'Chilled', status: 'Published', date: '2026-02-18', image: 'deli6.jpg' },
+    { id: 'd7', title: 'Club Sandwich', category: 'Daily-Deli', price: 7500, tag: 'Popular', status: 'Published', date: '2026-02-18', image: 'deli7.jpg' },
+    { id: 'd8', title: 'Hummus & Pita', category: 'Daily-Deli', price: 5000, tag: 'Vegan', status: 'Published', date: '2026-02-18', image: 'deli8.jpg' },
+    { id: 'd9', title: 'Fruit Parfait', category: 'Daily-Deli', price: 4000, tag: 'Fresh', status: 'Published', date: '2026-02-18', image: 'deli9.jpg' },
+    { id: 'd10', title: 'Beef Bresaola', category: 'Daily-Deli', price: 12000, tag: 'Luxury', status: 'Published', date: '2026-02-18', image: 'deli10.jpg' },
+    { id: 'd11', title: 'Assorted Olives', category: 'Daily-Deli', price: 3500, tag: 'Artisan', status: 'Published', date: '2026-02-18', image: 'deli11.jpg' },
+    { id: 'd12', title: 'Cheese Selection', category: 'Daily-Deli', price: 15000, tag: 'Premium', status: 'Published', date: '2026-02-18', image: 'deli12.jpg' }
+];
+
+        const defaultUsers = [
+            { id: 'USR-01', name: 'Cynthia Nguhemen', role: 'Administrator', status: 'Active', avatar: 'https://i.ibb.co/RTGCdJC7/FB-IMG-17790095436833360.jpg' },
+            { id: 'USR-02', name: 'Tall Dorcas', role: 'Editor', status: 'Active', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80' }
+        ];
+
+        let adminStore = {
+    posts: JSON.parse(localStorage.getItem('cyndy_shared_catalog')) || defaultPosts,
+    users: JSON.parse(localStorage.getItem('cyndy_admin_users')) || defaultUsers
+};
+
+function persistStore() {
+    localStorage.setItem('cyndy_shared_catalog', JSON.stringify(adminStore.posts));
+    localStorage.setItem('cyndy_admin_users', JSON.stringify(adminStore.users));
+    
+    // Syncs every post directly to Firebase Firestore
+    if (typeof saveItemToCatalog === "function" && adminStore.posts) {
+        adminStore.posts.forEach(item => {
+            saveItemToCatalog(item.id || item.name, item);
         });
-    } else if (context.mode === 'edit') {
-        state.products = state.products.map(p => p.id === context.targetId ? { 
-            ...p, name, category, tag, price, img, status 
-        } : p);
     }
 
-    localStorage.setItem('shared_products', JSON.stringify(state.products));
-    closeModal();
-    renderApp();
+    updateStats();
 }
 
-window.deletePost = function(id) {
-    if(!confirm("Are you sure you want to completely remove this post and store item?")) return;
-    state.products = state.products.filter(p => p.id !== id);
-    localStorage.setItem('shared_products', JSON.stringify(state.products));
-    renderApp();
-}
-// Admin-only logic
-async function renderReviewsTable() {
-    const tableBody = document.getElementById('reviewsTableBody');
-    if (!tableBody) return;
-    
-    tableBody.innerHTML = '';
-    const snapshot = await db.collection("reviews").get();
-    
-    snapshot.docs.forEach(doc => {
-        const review = doc.data();
-        const tr = document.createElement('tr');
-        tr.className = "border-b border-gray-100 hover:bg-amber-50/40 text-sm";
-        tr.innerHTML = `
-            <td class="px-6 py-4 font-semibold">${review.name}</td>
-            <td class="px-6 py-4 italic">"${review.comment}"</td>
-            <td class="px-6 py-4 text-right">
-                <button onclick="deleteReview('${doc.id}')" class="text-red-500 font-bold text-xs">
-                    <i class="fa-solid fa-trash"></i> Drop
-                </button>
-            </td>
-        `;
-        tableBody.appendChild(tr);
-    });
-}
 
-async function deleteReview(id) {
-    if (confirm("Drop this review?")) {
-        await db.collection("reviews").doc(id).delete();
-        renderReviewsTable(); // Refresh table
+        function updateStats() {
+            document.getElementById('stat-users').textContent = adminStore.users.length;
+            document.getElementById('stat-posts').textContent = adminStore.posts.length;
+        }
+
+        // Navigation tab switching logic
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = item.getAttribute('data-target');
+                    
+                    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('bg-slate-800', 'text-white'));
+                    item.classList.add('bg-slate-800', 'text-white');
+
+                    document.getElementById('view-users').classList.add('hidden');
+                    document.getElementById('view-posts').classList.add('hidden');
+
+                    if (target === 'users') {
+                        document.getElementById('view-users').classList.remove('hidden');
+                        document.getElementById('page-title').textContent = 'User Management Directory';
+                        renderUsers();
+                    } else if (target === 'posts' || target === 'dashboard') {
+                        document.getElementById('view-posts').classList.remove('hidden');
+                        
+                        
+                        ('page-title').textContent = target === 'dashboard' ? 'Dashboard Overview' : 'Post & Catalog Control';
+                        renderPosts();
+                    }
+                });
+            });
+
+            // Mobile Sidebar Toggles
+            const sidebar = document.getElementById('sidebar');
+            document.getElementById('open-sidebar').addEventListener('click', () => sidebar.classList.remove('-translate-x-full'));
+            document.getElementById('close-sidebar').addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
+
+            const activeSession = JSON.parse(localStorage.getItem('cyndy_admin_auth'));
+            if (activeSession && SecurityEngine.profiles[activeSession.profile]) {
+                SecurityEngine.selectedProfileKey = activeSession.profile;
+                SecurityEngine.grantAccess(SecurityEngine.profiles[activeSession.profile]);
+            }
+        });
+
+        function renderPosts() {
+            const tbody = document.getElementById('post-table-body');
+            tbody.innerHTML = adminStore.posts.map(post => `
+                <tr class="hover:bg-gray-50/50 transition">
+                    <td class="px-6 py-4 flex items-center space-x-3">
+                        <img src="${post.image || 'https://placehold.co/100x100'}" class="w-10 h-10 rounded-xl object-cover border border-gray-200" onerror="this.src='https://placehold.co/100x100?text=Item'">
+                        <div>
+                            <div class="font-bold text-gray-900">${post.title}</div>
+                            <div class="text-xs text-gray-400">Tag: ${post.tag || 'Standard'}</div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4"><span class="px-2.5 py-1 bg-gray-100 text-gray-700 rounded-lg text-xs font-semibold">${post.category}</span></td>
+                    <td class="px-6 py-4 font-mono font-semibold text-gray-900">₦${Number(post.price).toLocaleString()}</td>
+                    <td class="px-6 py-4">
+                        <span class="px-2.5 py-1 text-xs font-semibold rounded-full ${post.status === 'Published' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-amber-50 text-amber-700 border border-amber-100'}">${post.status}</span>
+                    </td>
+                    <td class="px-6 py-4 text-xs text-gray-500">${post.date}</td>
+                    <td class="px-6 py-4 text-right space-x-2">
+                        <button onclick="openEditPostModal('${post.id}')" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-xs font-semibold transition cursor-pointer">Edit</button>
+                        <button onclick="deletePost('${post.id}')" class="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 rounded-lg text-xs font-semibold transition cursor-pointer">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderUsers() {
+            const tbody = document.getElementById('user-table-body');
+            tbody.innerHTML = adminStore.users.map(u => `
+                <tr class="hover:bg-gray-50/50 transition">
+                    <td class="px-6 py-4 flex items-center space-x-3">
+                        <img src="${u.avatar}" class="w-9 h-9 rounded-full object-cover ring-2 ring-gray-100">
+                        <span class="font-semibold text-gray-900">${u.name}</span>
+                    </td>
+                    <td class="px-6 py-4 text-xs font-semibold uppercase text-gray-600">${u.role}</td>
+                    <td class="px-6 py-4"><span class="px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-semibold">${u.status}</span></td>
+                    <td class="px-6 py-4 text-right text-xs text-gray-400">Secured</td>
+                </tr>
+            `).join('');
+        }
+
+        const modal = document.getElementById('global-modal');
+        const postForm = document.getElementById('form-post');
+
+        document.getElementById('btn-add-post').addEventListener('click', () => {
+            document.getElementById('modal-title').textContent = 'Configure New Storefront Item';
+            postForm.reset();
+            document.getElementById('post-id').value = '';
+            modal.classList.remove('hidden');
+        });
+
+        document.querySelectorAll('.close-modal-trigger').forEach(btn => {
+            btn.addEventListener('click', () => modal.classList.add('hidden'));
+        });
+
+        document.getElementById('btn-submit-modal').addEventListener('click', () => {
+            const id = document.getElementById('post-id').value;
+            const title = document.getElementById('post-title').value;
+            const category = document.getElementById('post-category').value;
+            const price = Number(document.getElementById('post-price').value);
+            const tag = document.getElementById('post-tag').value;
+            const status = document.getElementById('post-status').value;
+            const image = document.getElementById('post-img-src').value || 'coconut cream.jpg';
+
+            if (!title || !price) {
+                alert('Please fill out all required fields.');
+                return;
+            }
+
+            if (id) {
+                adminStore.posts = adminStore.posts.map(p => p.id === id ? { ...p, title, category, price, tag, status, image } : p);
+            } else {
+                const newPost = {
+                    id: 'post_' + Date.now(),
+                    title,
+                    category,
+                    price,
+                    tag: tag || 'Bespoke',
+                    status,
+                    date: new Date().toISOString().split('T')[0],
+                    image
+                };
+                adminStore.posts.push(newPost);
+            }
+
+            persistStore();
+            renderPosts();
+            modal.classList.add('hidden');
+        });
+
+        function openEditPostModal(id) {
+            const post = adminStore.posts.find(p => p.id === id);
+            if (!post) return;
+
+            document.getElementById('modal-title').textContent = 'Modify Storefront Item';
+            document.getElementById('post-id').value = post.id;
+            document.getElementById('post-title').value = post.title;
+            document.getElementById('post-category').value = post.category;
+            document.getElementById('post-price').value = post.price;
+            document.getElementById('post-tag').value = post.tag;
+            document.getElementById('post-status').value = post.status;
+            document.getElementById('post-img-src').value = post.image;
+
+            modal.classList.remove('hidden');
+        }
+
+        function deletePost(id) {
+            if (confirm('Are you sure you want to remove this catalog item from production?')) {
+                adminStore.posts = adminStore.posts.filter(p => p.id !== id);
+                persistStore();
+                renderPosts();
+            }
+        }
+
+        function initDashboardState() {
+            updateStats();
+            renderPosts();
+            renderUsers();
+        }
+    </script>
+    <script type="module">
+  // 1. Import Firebase and Firestore using version 12.18.0 to match your main file
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+  // 2. Your correct web app configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDMf7oMecqMZkuaROmQt7eTsenETU4IGiI",
+    authDomain: "cyndy-bakes--n-more.firebaseapp.com",
+    databaseURL: "https://cyndy-bakes--n-more-default-rtdb.firebaseio.com",
+    projectId: "cyndy-bakes--n-more",
+    storageBucket: "cyndy-bakes--n-more.firebasestorage.app",
+    messagingSenderId: "3632819447",
+    appId: "1:3632819447:web:f860fc1ba1a8fc0b5ff7f2",
+    measurementId: "G-247PJK83VR"
+  };
+
+  // 3. Initialize Firebase and Firestore
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+
+  // 4. Admin function to add or update items live in Firestore
+  window.saveItemToCatalog = async function(itemId, itemData) {
+    try {
+      // Points to the "products" collection used by your main file
+      await setDoc(doc(db, "products", String(itemId)), itemData, { merge: true });
+
+      console.log("Item successfully pushed live to Firestore!");
+     
+    } catch (error) {
+      console.error("Error syncing item to Firestore: ", error);
+      alert("Failed to save changes. Check console for details.");
     }
-}
+  };
 
+  console.log("Admin Firebase ready.");
 </script>
+
+</body>
+</html>
